@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+
+
+
+const mongoDB = 'mongodb://localhost:27017/reviews';
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -37,5 +42,29 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+mongoose.Promise = global.Promise;
+
+connection = mongoose.connect(mongoDB, {
+  checkServerIdentity: true,
+})
+    .then(()=>{
+      console.log('MongoDB connection started!');
+    })
+    .catch((err)=>{
+      console.log('MongoDB connection failed!'+JSON.stringify(err));
+    })
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+
 
 module.exports = app;
