@@ -1,161 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="93864d57-77f4-4f43-a4c7-d88248bf9efa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/PostgreServer/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Rebase.Settings">
-    <option name="NEW_BASE" value="main" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-    <option name="RESET_MODE" value="MIXED" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;FedediBorgo&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "RasoFederico"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/RasoFederico/ProgettoIUM-TWEB.git&quot;,
-    &quot;accountId&quot;: &quot;6a65b63b-4688-4ecf-acf4-b18e3c75dd9d&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/RasoFederico/ProgettoIUM-TWEB.git",
+    "accountId": "dfcfeebd-a86a-4f3d-9cc5-5bc65cc6756e"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2vmCbBpkvxAKgYkByXu2JgAilgn" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2w5qML5Wj26AjhqJ63AxYzaznmF" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Node.js.app.js.executor": "Run",
-    "Node.js.www.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/feder/WebstormProjects/Javascript_es1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/programmi/Progetto IUM TWEB/ProgettoIUM-TWEB/Progetto_TWEB/Progetto_TWEB/PostgreServer",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\feder\Desktop\ProgettoIUM-TWEB\Progetto_TWEB\mainServer\public" />
-      <recent name="C:\Users\feder\Desktop\ProgettoIUM-TWEB\Progetto_TWEB\mainServer" />
-      <recent name="C:\Users\feder\Desktop\ProgettoIUM-TWEB\Progetto_TWEB\mainServer\data" />
-      <recent name="C:\Users\feder\Desktop\ProgettoIUM-TWEB\Progetto_TWEB\mainServer\views\layouts" />
-      <recent name="C:\Users\feder\Desktop\ProgettoIUM-TWEB\Progetto_TWEB\mainServer\views\partials" />
-    </key>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.22855.79" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="93864d57-77f4-4f43-a4c7-d88248bf9efa" name="Changes" comment="" />
-      <created>1744740931518</created>
+      <changelist id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="" />
+      <created>1745341732586</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1744740931518</updated>
-      <workItem from="1744740932605" duration="6368000" />
-      <workItem from="1744748591129" duration="5022000" />
-      <workItem from="1745051542920" duration="36000" />
-      <workItem from="1745526825669" duration="6514000" />
-      <workItem from="1745563280087" duration="210000" />
-      <workItem from="1745674484985" duration="9511000" />
+      <updated>1745341732586</updated>
+      <workItem from="1745341733762" duration="35000" />
     </task>
-    <task id="LOCAL-00001" summary="Homepage View">
-      <option name="closed" value="true" />
-      <created>1745533346993</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1745533346993</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Vista in dettaglio di un film generico">
-      <option name="closed" value="true" />
-      <created>1745683028619</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1745683028619</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Vista in dettaglio di un film generico + cambio logo e favicon">
-      <option name="closed" value="true" />
-      <created>1745683974128</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1745683974128</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Vista in dettaglio di un film generico">
-      <option name="closed" value="true" />
-      <created>1745684186366</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1745684186366</updated>
-    </task>
-    <task id="LOCAL-00005" summary="risolvo conflitto">
-      <option name="closed" value="true" />
-      <created>1745684662851</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1745684662851</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Homepage View" />
-    <MESSAGE value="Vista in dettaglio di un film generico + cambio logo e favicon" />
-    <MESSAGE value="Vista in dettaglio di un film generico" />
-    <MESSAGE value="risolvo conflitto" />
-    <option name="LAST_COMMIT_MESSAGE" value="risolvo conflitto" />
   </component>
 </project>
