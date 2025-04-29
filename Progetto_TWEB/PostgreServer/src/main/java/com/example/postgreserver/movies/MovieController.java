@@ -11,10 +11,26 @@ import java.util.Optional;
 public class MovieController {
     private MovieService movieService;
 
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
     @PostMapping("/get-movie-by-name")
-    public Optional<Movie> getMovieByName(@RequestBody String name){
+    public Optional<Movie> getMovieByName(@RequestBody MovieRequest receivedMovie){
+        String name = receivedMovie.getName();
         Optional<Movie> movie = movieService.findByTitle(name);
         return movie;
     }
 
+    public static class MovieRequest{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 }
