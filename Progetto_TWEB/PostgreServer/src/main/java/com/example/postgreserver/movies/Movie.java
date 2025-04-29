@@ -5,19 +5,22 @@ import jakarta.persistence.*;
 @Entity
 @Table
 public class Movie {
+
+    private Integer id;
+    private Integer minute;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long m_id;
 
-    private Integer id;
-    private String name;
     private String date;
+    private String name;
+    private String rating;
     private String tagline;
-    @Lob
+
     @Column(columnDefinition = "TEXT")
     private String description;
-    private Integer minute;
-    private String rating;
+
 
     public Movie() {}
 

@@ -2,7 +2,8 @@ package com.example.postgreserver.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
+
+import java.util.List;
 
 @Service
 public class MovieService {
@@ -13,7 +14,8 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Optional<Movie> findByTitle(String title) {
+    public List<Movie> findByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
+
 }

@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="merge">
-      <change afterPath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" afterDir="false" />
+    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="Vista in dettaglio dei film + correzione navbar">
+      <change afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/public/data/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/data/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/public/data/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/data/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/Posters.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/Posters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/public/Javascripts/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/views/partials/navbar.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/partials/navbar.hbs" afterDir="false" />
     </list>
@@ -37,12 +40,12 @@
     &quot;assignee&quot;: &quot;RasoFederico&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/RasoFederico/ProgettoIUM-TWEB.git&quot;,
-    &quot;accountId&quot;: &quot;dfcfeebd-a86a-4f3d-9cc5-5bc65cc6756e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/RasoFederico/ProgettoIUM-TWEB.git",
+    "accountId": "6a65b63b-4688-4ecf-acf4-b18e3c75dd9d"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -54,7 +57,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "Node.js.Navbar.js.executor": "Run",
     "Node.js.app.js.executor": "Run",
+    "Node.js.index.js.executor": "Run",
     "Node.js.www.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -65,14 +70,14 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.2.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.22855.79" />
       </set>
     </attachedChunks>
   </component>
@@ -85,14 +90,36 @@
       <option name="presentableId" value="Default" />
       <updated>1745341732586</updated>
       <workItem from="1745341733762" duration="35000" />
+      <workItem from="1745939784035" duration="15460000" />
     </task>
+    <task id="LOCAL-00001" summary="Vista in dettaglio dei film + correzione navbar">
+      <option name="closed" value="true" />
+      <created>1745829349718</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745829349718</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge" />
+    <MESSAGE value="Vista in dettaglio dei film + correzione navbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vista in dettaglio dei film + correzione navbar" />
   </component>
 </project>

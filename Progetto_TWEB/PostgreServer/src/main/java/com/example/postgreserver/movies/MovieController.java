@@ -1,11 +1,7 @@
 package com.example.postgreserver.movies;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 public class MovieController {
@@ -15,11 +11,12 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+
     @PostMapping("/get-movie-by-name")
-    public Optional<Movie> getMovieByName(@RequestBody MovieRequest receivedMovie){
+    public List<Movie> getMovieByName(@RequestBody MovieRequest receivedMovie){
         String name = receivedMovie.getName();
-        Optional<Movie> movie = movieService.findByTitle(name);
-        return movie;
+        System.out.println("Titolo ricevuto: " + name);
+        return movieService.findByTitle(name);
     }
 
     public static class MovieRequest{
