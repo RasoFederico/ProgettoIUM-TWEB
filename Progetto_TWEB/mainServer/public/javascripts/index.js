@@ -3,6 +3,21 @@ document.addEventListener("DOMContentLoaded", function() {
     button.addEventListener("click", askForFilm)
 })
 
+function init(){
+    try{
+        axios.post("/load-movies")
+            .then (response => {
+                if(Array.isArray(response.data)){
+                    renderMovies(response.data);
+                }else{
+                    console.error("response.data non è un array:", response.data);
+                }
+            })
+    }catch(e){
+        console.log(e);
+    }
+}
+
 
 function askForFilm (event){
     event.preventDefault()
@@ -46,7 +61,7 @@ function renderMovies(movies) {
 
         movieElement.innerHTML = `
       <div class="content-box mt-3 text-dark">
-        <img src="#" alt="Poster Film">
+        <img src=${movie.posterUrl} alt="Poster Film">
         <div class="content-info">
           <h2>${movie.name}</h2>
           <div class="date">Data di uscita: ${movie.date}</div>

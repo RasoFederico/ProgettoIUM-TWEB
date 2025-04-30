@@ -26,4 +26,13 @@ router.post('/get-movie-by-name', async function (req, res, next) {
     console.error(error.response?.data || error.message);  }
 })
 
+router.post('/load-movies', async function (req, res, next) {
+  try{
+    const response = await axios.post('http://localhost:8080/load-movies',{});
+    res.json(response.data);
+  }catch(error){
+    console.error(error.response?.data || error.message);
+  }
+})
+
 module.exports = router;

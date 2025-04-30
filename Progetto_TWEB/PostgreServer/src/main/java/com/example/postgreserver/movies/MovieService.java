@@ -18,4 +18,11 @@ public class MovieService {
         return movieRepository.findByTitle(title);
     }
 
+    public List<Movie> loadMovies(){
+        return movieRepository.loadMovies();
+    }
+
+    public List<Object[]> loadMoviesAndPosters(){
+        return movieRepository.findPostersWithMovie();
+    }
 }

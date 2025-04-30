@@ -1,5 +1,6 @@
 package com.example.postgreserver.movies;
 
+import com.example.postgreserver.posters.Posters;
 import jakarta.persistence.*;
 
 @Entity
