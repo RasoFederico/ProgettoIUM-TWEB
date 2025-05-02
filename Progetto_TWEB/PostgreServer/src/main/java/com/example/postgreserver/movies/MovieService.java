@@ -22,6 +22,10 @@ public class MovieService {
         return movieRepository.loadMovies();
     }
 
+    public String posterLink(Integer id){
+        return movieRepository.posterLink(id);
+    }
+
     public List<Object[]> loadMoviesAndPosters(){
         return movieRepository.findPostersWithMovie();
     }

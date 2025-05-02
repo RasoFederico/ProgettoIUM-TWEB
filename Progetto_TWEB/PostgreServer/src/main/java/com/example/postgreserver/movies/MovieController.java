@@ -26,14 +26,22 @@ public class MovieController {
 
     @PostMapping("/load-movies")
     public List<MovieAndPoster> loadMovies(){
-        List <MovieAndPoster> movieAndPosters = new ArrayList<>();
+       /* List <MovieAndPoster> movieAndPosters = new ArrayList<>();
         List<Object[]> results = movieService.loadMoviesAndPosters();
        for(Object[] result : results){
-            Movie movie = (Movie) result[0];
-            Posters posters = (Posters) result[1];
+           Posters posters = (Posters) result[0];
+           Movie movie = (Movie) result[1];
             MovieAndPoster data = new MovieAndPoster(movie.getId(), movie.getMinute(),movie.getDate(), movie.getName(),movie.getRating(), movie.getTagline(),movie.getDescription(), posters.getLink());
             movieAndPosters.add(data);
        }
+        return movieAndPosters;*/
+        List<Movie> movies = movieService.loadMovies();
+        List<MovieAndPoster> movieAndPosters = new ArrayList<>();
+        for(Movie movie : movies){
+            String link = movieService.posterLink(movie.getId());
+            MovieAndPoster data = new MovieAndPoster(movie.getId(), movie.getMinute(),movie.getDate(), movie.getName(),movie.getRating(), movie.getTagline(),movie.getDescription(), link);
+            movieAndPosters.add(data);
+        }
         return movieAndPosters;
     }
 

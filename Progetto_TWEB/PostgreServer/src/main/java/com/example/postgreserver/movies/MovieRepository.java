@@ -17,9 +17,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("SELECT m FROM Movie m ORDER BY m.id LIMIT 5 OFFSET 0")
     List<Movie> loadMovies();
 
+    @Query("SELECT p.link FROM Posters p WHERE p.id = :id")
+    String posterLink (@Param("id") Integer id);
+
     @Query("SELECT p, m FROM Posters p JOIN Movie m ON p.id = m.id")
     List<Object[]> findPostersWithMovie();
-
-
-
 }
