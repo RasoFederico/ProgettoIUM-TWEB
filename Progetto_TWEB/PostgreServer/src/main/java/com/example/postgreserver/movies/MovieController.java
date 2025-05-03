@@ -25,7 +25,7 @@ public class MovieController {
     }
 
     @PostMapping("/load-movies")
-    public List<MovieAndPoster> loadMovies(){
+    public List<Movie> loadMovies(){
        /* List <MovieAndPoster> movieAndPosters = new ArrayList<>();
         List<Object[]> results = movieService.loadMoviesAndPosters();
        for(Object[] result : results){
@@ -34,7 +34,7 @@ public class MovieController {
             MovieAndPoster data = new MovieAndPoster(movie.getId(), movie.getMinute(),movie.getDate(), movie.getName(),movie.getRating(), movie.getTagline(),movie.getDescription(), posters.getLink());
             movieAndPosters.add(data);
        }
-        return movieAndPosters;*/
+        return movieAndPosters;
         List<Movie> movies = movieService.loadMovies();
         List<MovieAndPoster> movieAndPosters = new ArrayList<>();
         for(Movie movie : movies){
@@ -42,7 +42,21 @@ public class MovieController {
             MovieAndPoster data = new MovieAndPoster(movie.getId(), movie.getMinute(),movie.getDate(), movie.getName(),movie.getRating(), movie.getTagline(),movie.getDescription(), link);
             movieAndPosters.add(data);
         }
-        return movieAndPosters;
+        return movieAndPosters;*/
+        return movieService.loadMovies();
+    }
+    @PostMapping("/get-actors")
+    public List<String> getActors(@RequestBody MovieId movie_id){
+        int id = movie_id.getMovie_id();
+        List<String> actors=movieService.getActorsId(id);
+        System.out.println(id);
+        return actors;
+    }
+
+    @PostMapping("/get-crew")
+    public List<String> getCrew(@RequestBody MovieId movie_id){
+        int id = movie_id.getMovie_id();
+        return movieService.getCrew(id);
     }
 
     public static class MovieRequest{
@@ -80,4 +94,16 @@ public class MovieController {
         }
 
     }
+
+    public static class MovieId{
+        private int movie_id;
+        public int getMovie_id() {
+            return movie_id;
+        }
+
+        public void setMovie_id(int movie_id) {
+            this.movie_id = movie_id;
+        }
+    }
+
 }

@@ -56,12 +56,12 @@ function renderMovies(movies) {
 
     movies.forEach(movie => {
         const movieElement = document.createElement("a");
-        movieElement.href = "/film";
+        movieElement.href = `/film?movie_name=${movie.name}&description=${movie.description}&movie_id=${movie.id}`;
         movieElement.className = "text-decoration-none";
 
         movieElement.innerHTML = `
       <div class="content-box mt-3 text-dark">
-        <img src=${movie.posterUrl} alt="Poster Film">
+        <img src="https://www.shutterstock.com/image-vector/no-photo-blank-image-icon-260nw-1955339317.jpg" alt="Poster Film">
         <div class="content-info">
           <h2>${movie.name}</h2>
           <div class="date">Data di uscita: ${movie.date}</div>

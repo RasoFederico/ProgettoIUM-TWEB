@@ -26,7 +26,19 @@ public class MovieService {
         return movieRepository.posterLink(id);
     }
 
+    public List<String> findActors(String movie){
+        return movieRepository.findActorNamesByMovieName(movie);
+    }
+
     public List<Object[]> loadMoviesAndPosters(){
         return movieRepository.findPostersWithMovie();
+    }
+
+    public List<String> getActorsId(Integer id){
+        return movieRepository.findActorsId(id);
+    }
+
+    public List<String> getCrew (Integer id){
+        return movieRepository.getCrew(id);
     }
 }

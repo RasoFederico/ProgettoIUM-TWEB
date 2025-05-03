@@ -22,4 +22,14 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("SELECT p, m FROM Posters p JOIN Movie m ON p.id = m.id")
     List<Object[]> findPostersWithMovie();
+
+    @Query("SELECT a.name FROM Actor a JOIN Movie m ON a.id = m.id WHERE m.name = :nomeFilm")
+    List<String> findActorNamesByMovieName(@Param("nomeFilm") String nomeFilm);
+
+    @Query("SELECT a.name FROM Actor a WHERE a.id = :id")
+    List<String> findActorsId(@Param("id") Integer id);
+
+    @Query("SELECT c.name FROM Crew c WHERE c.id = :id")
+    List<String> getCrew(@Param("id") Integer id);
+
 }
