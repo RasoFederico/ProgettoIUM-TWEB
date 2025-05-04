@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Query("SELECT new com.example.postgreserver.MovieAndPoster(m, p) FROM Movie m JOIN Posters p ON m.id = p.id ORDER BY m.id LIMIT 5 OFFSET 0")
+    @Query("SELECT new com.example.postgreserver.MovieAndPoster(m, p) FROM Movie m JOIN Posters p ON m.id = p.id WHERE m.m_id<6 ORDER BY m.id LIMIT 5 OFFSET 0")
     List<MovieAndPoster> loadMovies();
 
     @Query("SELECT new com.example.postgreserver.MovieAndPoster(m, p) FROM Movie m JOIN Posters p ON m.id = p.id WHERE m.name = :title ORDER BY m.id LIMIT 5 OFFSET 0")

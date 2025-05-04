@@ -19,8 +19,6 @@ public class MovieController {
 
     @PostMapping("/load-movies")
     public List<MovieAndPoster> loadMovies(){
-
-        System.out.println(movieService.loadMovies());
         return movieService.loadMovies();
     }
 
@@ -31,7 +29,7 @@ public class MovieController {
         return movieService.findByTitle(name);
     }
 
-    
+
     @PostMapping("/get-actors")
     public List<String> getActors(@RequestBody MovieId movie_id){
         int id = movie_id.getMovie_id();

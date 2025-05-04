@@ -13,6 +13,9 @@ router.get('/film', async function(req, res, next) {
   const name = req.query.movie_name;
   const description = req.query.description;
   const movie_id = req.query.movie_id;
+  const tagline = req.query.tagline;
+  const date = req.query.date;
+  const minute = req.query.minute;
   let actors;
   let crew;
   try{
@@ -27,7 +30,7 @@ router.get('/film', async function(req, res, next) {
   }catch(error){
     console.error(error.response?.data || error.message);
   }
-  res.render('pages/film', { projectname: 'Filmoteca', movie_name: name, description: description, actors: actors, crew: crew });
+  res.render('pages/film', { projectname: 'Filmoteca', movie_name: name, description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew });
 });
 
 router.post('/get-movie-by-name', async function (req, res, next) {

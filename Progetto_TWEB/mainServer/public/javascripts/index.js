@@ -64,7 +64,7 @@ function renderMovies(movies) {
         const poster = film.posters;
 
         const movieElement = document.createElement("a");
-        movieElement.href = `/film?movie_name=${movie.name}&description=${movie.description}&movie_id=${movie.id}&poster=${encodeURIComponent(poster["link"])}`;
+        movieElement.href = `/film?movie_name=${movie.name}&description=${movie.description}&minute=${movie["minute"]}&date=${movie["date"]}&tagline=${movie["tagline"]}&movie_id=${movie.id}&poster=${encodeURIComponent(poster["link"])}`;
         movieElement.className = "text-decoration-none";
 
         movieElement.innerHTML = `

@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="Vista in dettaglio dei film + correzione navbar">
-      <change afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/MovieAndPoster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" afterDir="false" />
+    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="gestione dei poster join">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/crew/CrewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/crew/CrewRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/Posters.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/Posters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/posters/PostersService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/public/javascripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +90,7 @@
       <updated>1745341732586</updated>
       <workItem from="1745341733762" duration="35000" />
       <workItem from="1745939784035" duration="15460000" />
-      <workItem from="1746361262583" duration="14425000" />
+      <workItem from="1746361262583" duration="20873000" />
     </task>
     <task id="LOCAL-00001" summary="Vista in dettaglio dei film + correzione navbar">
       <option name="closed" value="true" />
@@ -104,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745829349718</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="gestione dei poster join">
+      <option name="closed" value="true" />
+      <created>1746381762060</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746381762060</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +128,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merge" />
     <MESSAGE value="Vista in dettaglio dei film + correzione navbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Vista in dettaglio dei film + correzione navbar" />
+    <MESSAGE value="gestione dei poster join" />
+    <option name="LAST_COMMIT_MESSAGE" value="gestione dei poster join" />
   </component>
 </project>

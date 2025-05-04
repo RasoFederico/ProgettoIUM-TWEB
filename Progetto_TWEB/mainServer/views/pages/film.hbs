@@ -1,56 +1,55 @@
-<div class="container my-5">
-    <div class="row">
-        <!-- Poster -->
-        <div class="col-md-4">
-            <img id="poster" src="https://www.shutterstock.com/image-vector/no-photo-blank-image-icon-260nw-1955339317.jpg" class="img-fluid rounded" alt="Poster">
-        </div>
+<body onload=init()>
 
-        <!-- Dati del film -->
-        <div class="col-md-8">
-            <h1>{{movie_name}}</h1>
-            <p class="text-muted">Apr 25, 2025 · 96 Min.</p>
+    {{> navbar }}
 
-            <!-- Voto -->
-            <div class="d-flex align-items-center mb-2">
-                <div class="bg-primary text-white px-3 py-2 rounded">
-                    5.6
-                </div>
-                <small class="ms-2">★ 1 voti</small>
+    <div class="container my-5">
+        <div class="row">
+            <!-- Poster -->
+            <div class="col-md-4">
+                <img id="poster" src="https://www.shutterstock.com/image-vector/no-photo-blank-image-icon-260nw-1955339317.jpg" class="img-fluid rounded" alt="Poster">
             </div>
 
-            <!-- Genere -->
-            <p>Commedia | Cinema</p>
+            <!-- Dati del film -->
+            <div class="col-md-8">
+                <h1>{{movie_name}}</h1>
+                <p><i class="fa fa-calendar"></i> {{date}}</p>
+                <p><i class="fa fa-clock-o"></i> {{minute}}</p>
 
-            <!-- Tabs -->
-            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">Info</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="actors-tab" data-bs-toggle="tab" data-bs-target="#actors" type="button" role="tab">Actors</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="cast-tab" data-bs-toggle="tab" data-bs-target="#cast" type="button" role="tab">Cast</button>
-                </li>
-            </ul>
+                <!-- Slogan -->
+                <p>{{tagline}}</p>
 
-            <div class="tab-content p-3 bg-dark text-light rounded-bottom" id="myTabContent">
-                <div class="tab-pane fade show active" id="info" role="tabpanel">
-                    <h5>Trama</h5>
-                    <p><strong>{{movie_name}}</strong> - {{description}}</p>
-                </div>
-                <div class="tab-pane fade" id="actors" role="tabpanel">
-                    <p>{{actors}}</p>
-                </div>
-                <div class="tab-pane fade" id="cast" role="tabpanel">
-                    <p>{{crew}}</p>
+                <!-- Tabs -->
+                <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="actors-tab" data-bs-toggle="tab" data-bs-target="#actors" type="button" role="tab">Actors</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="cast-tab" data-bs-toggle="tab" data-bs-target="#cast" type="button" role="tab">Cast</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content p-3 bg-dark text-light rounded-bottom" id="myTabContent">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel">
+                        <h5>Trama</h5>
+                        <p><strong>{{movie_name}}</strong> - {{description}}</p>
+                    </div>
+                    <div class="tab-pane fade" id="actors" role="tabpanel">
+                        <p>{{actors}}</p>
+                    </div>
+                    <div class="tab-pane fade" id="cast" role="tabpanel">
+                        <p>{{crew}}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    {{>footer}}
 
-<script src = "/javascripts/film.js"></script>
+    <script src = "/javascripts/film.js"></script>
 
+</body>
 
