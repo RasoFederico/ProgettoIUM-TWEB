@@ -1,5 +1,6 @@
 package com.example.postgreserver.movies;
 
+import com.example.postgreserver.MovieAndPoster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +15,12 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public List<Movie> findByTitle(String title) {
+    public List<MovieAndPoster> findByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
 
-    public List<Movie> loadMovies(){
+    public List<MovieAndPoster> loadMovies(){
         return movieRepository.loadMovies();
-    }
-
-    public String posterLink(Integer id){
-        return movieRepository.posterLink(id);
-    }
-
-    public List<String> findActors(String movie){
-        return movieRepository.findActorNamesByMovieName(movie);
-    }
-
-    public List<Object[]> loadMoviesAndPosters(){
-        return movieRepository.findPostersWithMovie();
     }
 
     public List<String> getActorsId(Integer id){

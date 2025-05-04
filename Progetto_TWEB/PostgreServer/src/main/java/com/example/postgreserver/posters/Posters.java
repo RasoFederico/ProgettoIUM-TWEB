@@ -7,10 +7,11 @@ import jakarta.persistence.*;
 @Table
 public class Posters {
     private int id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long m_id;
-    @Lob
+    private Long p_id;
+
     @Column(columnDefinition = "TEXT")
     private String link;
 
