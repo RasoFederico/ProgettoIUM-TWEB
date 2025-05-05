@@ -47,6 +47,17 @@ router.post('/get-movie-by-name', async function (req, res, next) {
     console.error(error.response?.data || error.message);  }
 })
 
+router.post('/load-reviews', async function(req, res, next) {
+  //const {movieName} = req.body;
+  console.log('sono in load-reviews');
+  try{
+    const response = await axios.post('http://localhost:3002/load-reviews', {movie_title : "Percy Jackson & the Olympians: The Lightning Thief"});
+    res.json(response.data);
+  }catch (error){
+    res.json(error.response?.data || error.message);
+  }
+})
+
 router.post('/load-movies', async function (req, res, next) {
   try{
     const response = await axios.post('http://localhost:8080/load-movies',{});
