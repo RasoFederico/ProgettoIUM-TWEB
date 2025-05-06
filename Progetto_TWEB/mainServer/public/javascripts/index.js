@@ -4,7 +4,6 @@ function init(){
         axios.post("/load-movies")
             .then (response => {
                 if(Array.isArray(response.data)){
-                    console.log(response.data);
                     renderMovies(response.data);
                 }else{
                     console.error("response.data non è un array:", response.data);
@@ -64,7 +63,7 @@ function renderMovies(movies) {
         const poster = film.posters;
 
         const movieElement = document.createElement("a");
-        movieElement.href = `/film?movie_name=${movie.name}&description=${movie.description}&minute=${movie["minute"]}&date=${movie["date"]}&tagline=${movie["tagline"]}&movie_id=${movie.id}&poster=${encodeURIComponent(poster["link"])}`;
+        movieElement.href = `/film?movie_name=${encodeURIComponent(movie.name)}&description=${movie.description}&minute=${movie["minute"]}&date=${movie["date"]}&tagline=${movie["tagline"]}&movie_id=${movie.id}&poster=${encodeURIComponent(poster["link"])}`;
         movieElement.className = "text-decoration-none";
 
         movieElement.innerHTML = `
