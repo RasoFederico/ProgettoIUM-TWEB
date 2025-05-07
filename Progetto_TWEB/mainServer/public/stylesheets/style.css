@@ -26,3 +26,14 @@
   margin: 0;
   font-size: 1rem;
 }
+
+#reviews{
+  max-height: 300px;      /* o height: 300px; */
+  overflow-y: auto;       /* scrollbar verticale solo se serve */
+  border: 1px solid #333; /* per vedere meglio il contenitore */
+  padding: 10px;
+  margin-top: 20px;
+}
+a{
+  color: white;
+}

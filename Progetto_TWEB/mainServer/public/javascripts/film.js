@@ -19,13 +19,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function loadReviews(){
+async function loadReviews(){
     console.log("sono in load reviews");
     const movieName = document.getElementById("movie_name").textContent;
     console.log(movieName);
     let reviews;
     try{
-        const response = axios.post('/load-reviews',{name: movieName} );
+        const response = await axios.post('/load-reviews',{name: movieName} );
         reviews = response.data;
         console.log(reviews);
     }catch(error){
@@ -45,8 +45,7 @@ function renderReviews(reviews){
         reviewElement.className = "text-decoration-none";
         reviewElement.innerHTML =`
             <div class="review-box mt-3 text-light bg-dark p-4 rounded shadow">
-            <h2 class="mb-3">Recensione</h2>
-            <div class="review bg-secondary rounded p-3">
+            <div class="review bg-secondary rounded p-3" onclick="window.open('https://www.rottentomatoes.com/${review.rotten_tomatoes_link}', '_blank')">
                 <div class="reviewer-name fw-bold">A cura di: ${review.critic_name}</div>
                 <div class="review-rating text-warning">Voto: ${review.review_score}/5</div>
                 <p class="review-text mt-2">${review.review_content}</p>
