@@ -35,22 +35,28 @@ async function loadReviews(){
 
 }
 
-function renderReviews(reviews){
+function renderReviews(reviews) {
     const container = document.getElementById("reviews_container");
-
     container.innerHTML = "";
 
-    reviews.forEach((review)=> {
+    reviews.forEach((review) => {
+        const topCriticBadge = review.top_critic ? `<span class="top-critic-badge" title="Top Critic"></span>` : "";
+
         const reviewElement = document.createElement("a");
         reviewElement.className = "text-decoration-none";
-        reviewElement.innerHTML =`
+        reviewElement.innerHTML = `
             <div class="review-box mt-3 text-light bg-dark p-4 rounded shadow">
-            <div class="review bg-secondary rounded p-3" onclick="window.open('https://www.rottentomatoes.com/${review.rotten_tomatoes_link}', '_blank')">
-                <div class="reviewer-name fw-bold">A cura di: ${review.critic_name}</div>
-                <div class="review-rating text-warning">Voto: ${review.review_score}/5</div>
-                <p class="review-text mt-2">${review.review_content}</p>
-            </div>
-        </div> 
+                <div class="review bg-secondary rounded p-3" onclick="window.open('https://www.rottentomatoes.com/${review.rotten_tomatoes_link}', '_blank')">
+                    <div class="reviewer-name fw-bold position-relative">
+                        A cura di: ${review.critic_name}
+                        ${topCriticBadge}
+                    </div>
+                    <div class="review-rating ${review.review_type === 'Fresh' ? 'text-fresh' : 'text-rotten'}">
+                        ${review.review_type}
+                    </div>
+                    <p class="review-text mt-2">${review.review_content}</p>
+                </div>
+            </div> 
         `;
         container.appendChild(reviewElement);
     });
