@@ -1,55 +1,103 @@
+<script src="/socket.io/socket.io.js"></script>
 <body onload=init()>
 
-    {{> navbar }}
+{{> navbar }}
 
-    <div class="container my-5">
-        <div class="row">
-            <!-- Poster -->
-            <div class="col-md-4">
-                <img id="poster" src="https://www.shutterstock.com/image-vector/no-photo-blank-image-icon-260nw-1955339317.jpg" class="img-fluid rounded" alt="Poster">
+<div class="container my-5">
+    <div class="row">
+
+        <!-- Poster -->
+        <div class="col-md-2">
+            <img id="poster" src="https://www.shutterstock.com/image-vector/no-photo-blank-image-icon-260nw-1955339317.jpg" class="img-fluid rounded" alt="Poster">
+        </div>
+
+        <!-- Dati del film - inizialmente prende tutto lo spazio disponibile -->
+        <div class="col-md-6">
+            <h1>{{movie_name}}</h1>
+            <p><i class="fa fa-calendar"></i> {{date}}</p>
+            <p><i class="fa fa-clock-o"></i> {{minute}}</p>
+
+            <!-- Slogan -->
+            <p>{{tagline}}</p>
+
+            <!-- Menu a tendina (INFO, ATTORI, CAST) -->
+            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">Info</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="actors-tab" data-bs-toggle="tab" data-bs-target="#actors" type="button" role="tab">Actors</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cast-tab" data-bs-toggle="tab" data-bs-target="#cast" type="button" role="tab">Cast</button>
+                </li>
+            </ul>
+
+            <!-- Riempimento menu a tendina-->
+            <div class="tab-content p-3 bg-dark text-light rounded-bottom" id="myTabContent">
+                <div class="tab-pane fade show active" id="info" role="tabpanel">
+                    <h5>Trama</h5>
+                    <p><strong>{{movie_name}}</strong> - {{description}}</p>
+                </div>
+                <div class="tab-pane fade" id="actors" role="tabpanel">
+                    <p>{{actors}}</p>
+                </div>
+                <div class="tab-pane fade" id="cast" role="tabpanel">
+                    <p>{{crew}}</p>
+                </div>
             </div>
 
-            <!-- Dati del film -->
-            <div class="col-md-8">
-                <h1>{{movie_name}}</h1>
-                <p><i class="fa fa-calendar"></i> {{date}}</p>
-                <p><i class="fa fa-clock-o"></i> {{minute}}</p>
+            <div class="mt-3" id="initial_form" style="display: block">
+                <form onsubmit="return false;">
+                    <p style="display: none">
+                        <label for="roomNo"> Your room </label>
+                        <input type="text" id="roomNo" name="roomNo" value="{{movie_name}}">
+                    </p>
+                    <p><label for="name"> Nome </label>
+                        <input type="text" id="name" name="name" class="form-control" style="width: auto; display: inline-block;">
+                        <button id="connect" type="button" class="btn btn-primary" onclick="connectToRoom()">Chat</button>
+                    </p>
+                </form>
+            </div>
+        </div>
 
-                <!-- Slogan -->
-                <p>{{tagline}}</p>
+        <!-- Chat - inizialmente nascosta -->
+        <div class="col-md-4" id="chat_interface" style="display: none">
+            <div class="card">
 
-                <!-- Tabs -->
-                <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">Info</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="actors-tab" data-bs-toggle="tab" data-bs-target="#actors" type="button" role="tab">Actors</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="cast-tab" data-bs-toggle="tab" data-bs-target="#cast" type="button" role="tab">Cast</button>
-                    </li>
-                </ul>
-
-                <div class="tab-content p-3 bg-dark text-light rounded-bottom" id="myTabContent">
-                    <div class="tab-pane fade show active" id="info" role="tabpanel">
-                        <h5>Trama</h5>
-                        <p><strong>{{movie_name}}</strong> - {{description}}</p>
+                <!-- Chat Head -->
+                <div class="chat-header p-3 bg-dark text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">Chat: {{movie_name}}</h5>
+                            <small>Benvenuto <span id="who_you_are"></span></small>
+                        </div>
+                        <button id="close_chat" type="button" class="btn btn-sm btn-primary" onclick="closeChat()">
+                            <i class="fa fa-times"></i> Chiudi
+                        </button>
                     </div>
-                    <div class="tab-pane fade" id="actors" role="tabpanel">
-                        <p>{{actors}}</p>
-                    </div>
-                    <div class="tab-pane fade" id="cast" role="tabpanel">
-                        <p>{{crew}}</p>
+                </div>
+
+                <!-- Chat Body -->
+                <div class="card-body" style="height: 350px; overflow-y: auto;">
+                    <div class="chat-container p-3" id="history"></div>
+                </div>
+
+                <!-- Chat footer -->
+                <div class="card-footer bg-light">
+                    <div id="input" class="input-group">
+                        <input type="text" id="chat_input" class="form-control chat-input" placeholder="Scrivi un messaggio...">
+                        <button class="btn btn-primary" id="chat_send" onclick="sendChatText()">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    {{>footer}}
+{{>footer}}
 
-    <script src = "/javascripts/film.js"></script>
-
+<script src="/javascripts/film.js"></script>
 </body>
-

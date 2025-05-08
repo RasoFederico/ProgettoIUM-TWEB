@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="gestione dei poster join">
+    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="correzione tempi di attesa e modifica sulla vista del film">
+      <change afterPath="$PROJECT_DIR$/mainServer/socket.io/socket-io.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/PostgreServer/src/main/java/com/example/postgreserver/movies/MovieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/bin/www" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/public/javascripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/layouts/layout.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -58,12 +59,13 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Node.js.Navbar.js.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.app.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.film.js.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.www.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;socket.io&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/programmi/Progetto IUM TWEB/ProgettoIUM-TWEB/Progetto_TWEB/Progetto_TWEB/PostgreServer&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/feder/Desktop/ProgettoIUM-TWEB/Progetto_TWEB&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -90,7 +92,13 @@
       <updated>1745341732586</updated>
       <workItem from="1745341733762" duration="35000" />
       <workItem from="1745939784035" duration="15460000" />
-      <workItem from="1746361262583" duration="20873000" />
+      <workItem from="1746361262583" duration="21485000" />
+      <workItem from="1746463103447" duration="1886000" />
+      <workItem from="1746543863734" duration="7409000" />
+      <workItem from="1746611097120" duration="5070000" />
+      <workItem from="1746630255334" duration="565000" />
+      <workItem from="1746632650962" duration="1331000" />
+      <workItem from="1746637982334" duration="4809000" />
     </task>
     <task id="LOCAL-00001" summary="Vista in dettaglio dei film + correzione navbar">
       <option name="closed" value="true" />
@@ -108,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746381762060</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="correzione tempi di attesa e modifica sulla vista del film">
+      <option name="closed" value="true" />
+      <created>1746388591300</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746388591301</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +145,7 @@
     <MESSAGE value="merge" />
     <MESSAGE value="Vista in dettaglio dei film + correzione navbar" />
     <MESSAGE value="gestione dei poster join" />
-    <option name="LAST_COMMIT_MESSAGE" value="gestione dei poster join" />
+    <MESSAGE value="correzione tempi di attesa e modifica sulla vista del film" />
+    <option name="LAST_COMMIT_MESSAGE" value="correzione tempi di attesa e modifica sulla vista del film" />
   </component>
 </project>
