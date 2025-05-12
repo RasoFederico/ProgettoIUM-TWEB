@@ -53,3 +53,42 @@
   border-radius: 50%;
   border: 2px solid #fff;
 }
+
+/*CHAT*/
+.chat-message {
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  max-width: 75%;
+  position: relative;
+}
+
+.chat-message-received {
+  background-color: #f1f0f0;
+  float: left;
+  border-bottom-left-radius: 0;
+}
+
+.chat-message-sent {
+  background-color: #3366ff;
+  color: white;
+  float: right;
+  border-bottom-right-radius: 0;
+}
+
+.chat-time {
+  font-size: 12px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.sent-time {
+  color: #ccc;
+  text-align: right;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
