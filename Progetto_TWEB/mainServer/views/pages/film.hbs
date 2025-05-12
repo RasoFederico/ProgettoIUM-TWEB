@@ -38,7 +38,7 @@
                 <div class="tab-content p-3 bg-dark text-light rounded-bottom" id="myTabContent">
                     <div class="tab-pane fade show active" id="info" role="tabpanel">
                         <h5>Trama</h5>
-                        <p><strong>{{movie_name}}</strong> - {{description}}</p>
+                        <p>{{description}}</p>
                     </div>
                     <div class="tab-pane fade" id="actors" role="tabpanel">
                         <p>{{actors}}</p>
@@ -73,7 +73,7 @@
                     <div class="chat-header p-3 bg-dark text-white">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h5 class="mb-0">Chat: {{movie_name}}</h5>
+                                <h5 class="mb-0" id="movie_name_chat">Chat: </h5>
                                 <small>Benvenuto <span id="who_you_are"></span></small>
                             </div>
                             <button id="close_chat" type="button" class="btn btn-sm btn-primary" onclick="closeChat()">

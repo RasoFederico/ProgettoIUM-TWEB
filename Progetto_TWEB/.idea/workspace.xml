@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="facciamo merge">
-      <change beforePath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/stylesheets/style.css" afterDir="false" />
+    <list default="true" id="e4524537-8ea3-40bc-b007-568a0af26b07" name="Changes" comment="style chat">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/public/javascripts/film.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer/views/pages/film.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747081235319</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="style chat">
+      <option name="closed" value="true" />
+      <created>1747082664655</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747082664655</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +170,7 @@
     <MESSAGE value="gestione dei poster join" />
     <MESSAGE value="correzione tempi di attesa e modifica sulla vista del film" />
     <MESSAGE value="facciamo merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="facciamo merge" />
+    <MESSAGE value="style chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="style chat" />
   </component>
 </project>

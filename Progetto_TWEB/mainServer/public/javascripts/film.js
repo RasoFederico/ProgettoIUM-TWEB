@@ -233,5 +233,6 @@ function writeOnHistory(text, type = 'system', sender = null) {
 function hideLoginInterface(room, userId) {
     document.getElementById('initial_form').style.display = 'none';
     document.getElementById('chat_interface').style.display = 'block';
+    document.getElementById('movie_name_chat').innerHTML = 'CHAT: '+document.getElementById('movie_name').textContent;
     document.getElementById('who_you_are').innerHTML = userId;
 }
