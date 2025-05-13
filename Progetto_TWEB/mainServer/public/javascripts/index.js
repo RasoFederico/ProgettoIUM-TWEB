@@ -1,4 +1,4 @@
-//GESTIONE HOMEPAGE
+//INIZIALIZZAZIONE HOMEPAGE
 function init(){
     try{
         axios.post("/load-movies")
@@ -15,7 +15,7 @@ function init(){
 }
 
 
-//GESTIONE SEARCH
+//SEARCH
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById("search_btn");
     button.addEventListener("click", askForFilm)

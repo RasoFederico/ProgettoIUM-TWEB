@@ -1,9 +1,6 @@
 exports.init = function(io) {
     io.sockets.on('connection', function (socket) {
         try {
-            /**
-             * it creates or joins a room
-             */
             socket.on('create or join', function (room, userId) {
                 socket.join(room);
                 io.sockets.to(room).emit('joined', room, userId);

@@ -2,60 +2,47 @@ let name = null;
 let roomNo = null;
 let socket = io();
 
+/*INIZIALIZZAZIONE FILM*/
 function init(){
-    document.getElementById("mynavbar").style.display = "none";
-    loadReviews();
+
+    loadReviews(); //gestisce le recensioni
 
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
-    // Imposta la vista iniziale dei dettagli del film espansa
-    // Verifica se l'elemento esiste prima di manipolarlo
     const movieDetailsElement = document.querySelector('.col-md-6');
     if (movieDetailsElement) {
         movieDetailsElement.classList.remove('col-md-6');
         movieDetailsElement.classList.add('col-md-10');
     }
 
-    // Debug per verificare che la connessione Socket.io sia stabilita
-    console.log('Socket.io initialization');
-
-    // Gestione dell'evento di connessione Socket.io
+    //Chat socket.io
     socket.on('connect', function() {
-        console.log('Connected to Socket.io server with ID:', socket.id);
+        console.log('Connessione a socket.io con ID:', socket.id);
     });
 
     socket.on('joined', function (room, userId) {
-        console.log('Joined event received:', room, userId, 'Current user:', name);
+        console.log('Evento di:', room, userId, 'Utente attuale:', name);
         if (userId === name) {
-            // Questa parte ora è gestita direttamente in connectToRoom
-            // ma lasciamo qui per retrocompatibilità
-            console.log('Same user joined confirmation');
+            console.log('Stesso utente');
         } else {
-            writeOnHistory('<b>'+userId+'</b>' + ' joined room ' + room, 'system'); //nuovo utente entra nella chat
+            writeOnHistory('<b>'+userId+'</b>' + ' entra nella stanza ' + room, 'system');
         }
     });
 
     socket.on('chat', function (room, userId, chatText) {
-        console.log('Chat event received:', room, userId, chatText);
+        console.log('Chat riceve evento:', room, userId, chatText);
         let who = userId;
         if (userId === name) {
-            writeOnHistory(chatText, 'sent', 'Tu'); //sta scrivendo l'utente che ha effettuato l'accesso
+            writeOnHistory(chatText, 'sent', 'Tu'); //scrive l'utente registrato
         } else {
-            writeOnHistory(chatText, 'received', who);
+            writeOnHistory(chatText, 'received', who); //riceve il messaggio di
         }
-    });
-
-    // Gestione degli errori Socket.io
-    socket.on('error', function(error) {
-        console.error('Socket.io error:', error);
-    });
-
-    socket.on('disconnect', function(reason) {
-        console.log('Disconnected from Socket.io server:', reason);
     });
 }
 
+
+//URL: gestisco i poster e movie_name
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const posterPath = params.get("poster");
@@ -70,6 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+//RECENSIONE: caricamento
 async function loadReviews(){
     console.log("sono in load reviews");
     const movieName = document.getElementById("movie_name").textContent;
@@ -85,6 +73,7 @@ async function loadReviews(){
     renderReviews(reviews);
 }
 
+//RECENSIONE: creo l'oggetto
 function renderReviews(reviews) {
     const container = document.getElementById("reviews_container");
     container.innerHTML = "";
@@ -112,27 +101,19 @@ function renderReviews(reviews) {
     });
 }
 
-/*CHAT*/
-//scrive un nuovo messaggio
+/*CHAT: gestisco l'invio al server il messaggio*/
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     if (chatText.trim() !== '') {
-        // Aggiungi l'emissione verso il server
-        socket.emit('chat', roomNo, name, chatText);
 
-        // Debug per verificare che il messaggio venga inviato
-        console.log('Sending message:', roomNo, name, chatText);
+        socket.emit('chat', roomNo, name, chatText); //invio al server il messaggio
+        console.log('Invia messaggio:', roomNo, name, chatText);
 
-        // Pulisci il campo input
-        document.getElementById('chat_input').value = '';
-
-        // Opzionale: mostra immediatamente il messaggio in locale
-        // nel caso in cui il server non rifletta il messaggio
-        //writeOnHistory(chatText, 'sent', 'Tu');
+        document.getElementById('chat_input').value = ''; //pulisce il campo di testo
     }
 }
 
-// Gestisci l'invio con Enter
+//CHAT: gestisco l'evento dell'invio del nuovo messaggio
 document.addEventListener('DOMContentLoaded', function() {
     const chatInput = document.getElementById('chat_input');
     if (chatInput) {
@@ -145,63 +126,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Funzione modificata per risolvere il problema della visualizzazione della chat
+/*CHAT: connessione socket.io e ridimensionamento vista*/
 function connectToRoom() {
-    roomNo = document.getElementById('roomNo').value;
+    roomNo = document.getElementById('movie_name').textContent;
     name = document.getElementById('name').value;
     if (!name) name = 'Unknown-' + Math.random();
 
-    // Ridimensiona la sezione dei dettagli per fare spazio alla chat
     const movieDetailsElement = document.querySelector('.col-md-10');
     if (movieDetailsElement) {
         movieDetailsElement.classList.remove('col-md-10');
         movieDetailsElement.classList.add('col-md-6');
     }
 
-    // Prima emettiamo l'evento per unirsi alla room
-    socket.emit('create or join', roomNo, name);
+    socket.emit('create or join', roomNo, name); //creo la stanza
 
-    // Poi impostiamo un breve timeout per assicurare che il server abbia tempo di elaborare
-    // la richiesta di connessione prima di mostrare l'interfaccia e permettere l'invio
-    setTimeout(() => {
-        // Mostra l'interfaccia chat dopo un breve ritardo
+    setTimeout(() => { //timeout per dare il tempo alla conessione socket.io di connettersi ed elaborare i dati
+
         hideLoginInterface(roomNo, name);
 
-        // Aggiungi un messaggio di sistema per confermare la connessione
         writeOnHistory('<b>Ti sei unito alla stanza: ' + roomNo + '</b>', 'system');
     }, 300);
 }
 
+/*CHAT: chiude la chat e disconnette lo user dal socket.io*/
 function closeChat() {
-    // Nascondi l'interfaccia chat
+
     document.getElementById('chat_interface').style.display = 'none';
     document.getElementById('initial_form').style.display = 'block';
 
-    // Ripristina la vista espansa dei dettagli del film
     const movieDetailsElement = document.querySelector('.col-md-6');
     if (movieDetailsElement) {
         movieDetailsElement.classList.remove('col-md-6');
         movieDetailsElement.classList.add('col-md-10');
     }
 
-    // Opzionale: pulisci la chat history
-    document.getElementById('history').innerHTML = '';
-
-    // Lasciamo l'utente connesso alla socket, ma nascondiamo solo l'interfaccia
-    // Se volessimo disconnettere: socket.emit('leave', roomNo, name);
+    socket.emit('leave', roomNo, name);
 }
 
+/*CHAT: scrivo i messaggi nella vista chat*/
 function writeOnHistory(text, type = 'system', sender = null) {
     let history = document.getElementById('history');
 
     if (type === 'system') {
-        // System message (joining notification)
         let paragraph = document.createElement('p');
         paragraph.className = 'text-center text-muted small';
         paragraph.innerHTML = text;
         history.appendChild(paragraph);
     } else {
-        // Chat message
         let messageContainer = document.createElement('div');
         messageContainer.className = 'clearfix';
 
@@ -220,16 +191,10 @@ function writeOnHistory(text, type = 'system', sender = null) {
         messageContainer.appendChild(messageDiv);
         history.appendChild(messageContainer);
     }
-
-    // Scroll to bottom
     history.scrollTop = history.scrollHeight;
 }
 
-/**
- * it hides the initial form and shows the chat
- * @param room the selected room
- * @param userId the user name
- */
+/*CHAT: nascondo il login iniziale*/
 function hideLoginInterface(room, userId) {
     document.getElementById('initial_form').style.display = 'none';
     document.getElementById('chat_interface').style.display = 'block';
