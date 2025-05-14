@@ -17,7 +17,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping("/load-movies")
+    @GetMapping("/load-movies")
     public List<MovieAndPoster> loadMovies(){
         return movieService.loadMovies();
     }
@@ -29,20 +29,15 @@ public class MovieController {
         return movieService.findByTitle(name);
     }
 
-
-    @PostMapping("/get-actors")
-    public List<String> getActors(@RequestBody MovieId movie_id){
-        int id = movie_id.getMovie_id();
-        List<String> actors=movieService.getActorsId(id);
-        System.out.println(id);
+    @GetMapping("/get-actors-crew")
+    public List<String> getActorsCrew(@RequestParam int movieId){
+        List<String> actors = movieService.getActorsId(movieId);
+        List<String> crew = movieService.getCrew(movieId);
+        actors.add("///");
+        actors.addAll(crew);
         return actors;
     }
 
-    @PostMapping("/get-crew")
-    public List<String> getCrew(@RequestBody MovieId movie_id){
-        int id = movie_id.getMovie_id();
-        return movieService.getCrew(id);
-    }
 
     public static class MovieRequest{
         private String name;
@@ -53,17 +48,6 @@ public class MovieController {
 
         public void setName(String name) {
             this.name = name;
-        }
-    }
-
-    public static class MovieId{
-        private int movie_id;
-        public int getMovie_id() {
-            return movie_id;
-        }
-
-        public void setMovie_id(int movie_id) {
-            this.movie_id = movie_id;
         }
     }
 

@@ -1,7 +1,7 @@
 //GESTIONE HOMEPAGE
 function init(){
     try{
-        axios.post("/load-movies")
+        axios.get("/load-movies")
             .then (response => {
                 if(Array.isArray(response.data)){
                     renderMovies(response.data);

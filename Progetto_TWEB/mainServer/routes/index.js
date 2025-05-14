@@ -18,14 +18,11 @@ router.get('/film', async function(req, res, next) {
   let actors;
   let crew;
   try{
-    const response = await axios.post("http://localhost:8080/get-actors", {movie_id: movie_id});
-    actors = response.data;
-  }catch(error){
-    console.error(error.response?.data || error.message);
-  }
-  try{
-    const response = await axios.post("http://localhost:8080/get-crew", {movie_id: movie_id});
-    crew=response.data;
+    const response = await axios.get("http://localhost:8080/get-actors-crew?movieId="+movie_id);
+     const data = response.data;
+    const separatorIndex = data.indexOf("///");
+     actors = data.slice(0, separatorIndex);
+     crew = data.slice(separatorIndex + 1);
   }catch(error){
     console.error(error.response?.data || error.message);
   }
@@ -58,9 +55,9 @@ router.post('/load-reviews', async function(req, res, next) {
   }
 })
 
-router.post('/load-movies', async function (req, res, next) {
+router.get('/load-movies', async function (req, res, next) {
   try{
-    const response = await axios.post('http://localhost:8080/load-movies',{});
+    const response = await axios.get('http://localhost:8080/load-movies',{});
     res.json(response.data);
   }catch(error){
     console.error(error.response?.data || error.message);
