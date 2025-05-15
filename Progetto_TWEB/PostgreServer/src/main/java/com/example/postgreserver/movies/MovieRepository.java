@@ -24,4 +24,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("SELECT c.name FROM Crew c WHERE c.id = :id")
     List<String> getCrew(@Param("id") Integer id);
 
+    @Query("SELECT g.genre FROM Genres g WHERE g.id = :id")
+    List<String> getGenres(@Param("id") Integer id);
+
 }

@@ -22,16 +22,18 @@ router.get('/film', async function(req, res, next) {
   const minute = req.query.minute;
   let actors;
   let crew;
+  let genres;
   try{
-    const response = await axios.get("http://localhost:8080/get-actors-crew?movieId="+movie_id);
-     const data = response.data;
-    const separatorIndex = data.indexOf("///");
-     actors = data.slice(0, separatorIndex);
-     crew = data.slice(separatorIndex + 1);
+    const response = await axios.get("http://localhost:8080/get-actors-crew-genres?movieId="+movie_id);
+    const data = response.data;
+    actors = data.actors;
+    crew = data.crew;
+    genres = data.genres;
   }catch(error){
     console.error(error.response?.data || error.message);
   }
-  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew });
+  console.log(actors);
+  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres });
 });
 
 /**
@@ -56,10 +58,10 @@ router.post('/get-movie-by-name', async function (req, res, next) {
  */
 router.post('/load-reviews', async function(req, res, next) {
   const movieName = req.body.name;
-  console.log("my movie revie "+movieName);
+  //console.log("my movie revie "+movieName);
   try{
     const response = await axios.post('http://localhost:3002/load-reviews', {movie_title : movieName});
-    console.log(response.data);
+    //console.log(response.data);
     res.json(response.data);
   }catch (error){
     res.json(error.response?.data || error.message);

@@ -52,6 +52,16 @@ public class MovieController {
         return actors;
     }
 
+    @GetMapping("/get-actors-crew-genres")
+    public MovieData getActorsCrewGenres(@RequestParam int movieId){
+        List<String> actors = movieService.getActorsId(movieId);
+        List<String> crew = movieService.getCrew(movieId);
+        List<String> genres = movieService.getGenres(movieId);
+        MovieData data = new MovieData(actors, crew, genres);
+
+        return data;
+    }
+
 
     public static class MovieRequest{
         private String name;
@@ -62,6 +72,18 @@ public class MovieController {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+
+    public static class MovieData{
+        private List<String> actors;
+        private List<String> crew;
+        private List<String> genres;
+
+        public MovieData(List<String> actors, List<String> crew, List<String> genres){
+            this.actors = actors;
+            this.crew = crew;
+            this.genres = genres;
         }
     }
 

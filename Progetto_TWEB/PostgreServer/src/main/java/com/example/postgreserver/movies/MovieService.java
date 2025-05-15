@@ -30,4 +30,6 @@ public class MovieService {
     public List<String> getCrew (Integer id){
         return movieRepository.getCrew(id);
     }
+
+    public List<String> getGenres(Integer id){return movieRepository.getGenres(id);}
 }
