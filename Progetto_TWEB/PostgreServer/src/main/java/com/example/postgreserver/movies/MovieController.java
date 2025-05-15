@@ -17,11 +17,20 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    /**
+     * Restituisce la lista dei film con i relativi poster.
+     * @return
+     */
     @GetMapping("/load-movies")
     public List<MovieAndPoster> loadMovies(){
         return movieService.loadMovies();
     }
 
+    /**
+     * Restituisce la lista dei film con i relativi poster attraverso una ricerca per nome
+     * @param receivedMovie nome del film
+     * @return
+     */
     @PostMapping("/get-movie-by-name")
     public List<MovieAndPoster> getMovieByName(@RequestBody MovieRequest receivedMovie){
         String name = receivedMovie.getName();
@@ -29,6 +38,11 @@ public class MovieController {
         return movieService.findByTitle(name);
     }
 
+    /**
+     * Restituisce i nomi degli attori per un film specifico passandogli ID
+     * @param movieId id del film
+     * @return
+     */
     @GetMapping("/get-actors-crew")
     public List<String> getActorsCrew(@RequestParam int movieId){
         List<String> actors = movieService.getActorsId(movieId);

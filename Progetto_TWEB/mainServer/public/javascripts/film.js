@@ -2,7 +2,17 @@ let name = null;
 let roomNo = null;
 let socket = io();
 
-/*INIZIALIZZAZIONE FILM*/
+/**
+ * Inizializza l'interfaccia utente e la configurazione della chat.
+ *
+ * - Carica le recensioni tramite loadReviews().
+ * - Mostra il form iniziale e nasconde l'interfaccia della chat.
+ * - Modifica le classi CSS dell'elemento contenente i dettagli del film per adattare la larghezza.
+ * - Configura gli event listener di Socket.IO per:
+ *      - Connessione (connect): logga l'ID del socket.
+ *      - Evento joined: notifica quando un utente entra nella stanza.
+ *      - Evento chat: gestisce la ricezione dei messaggi di chat, distinguendo messaggi inviati e ricevuti.
+ */
 function init(){
 
     loadReviews(); //gestisce le recensioni
@@ -42,7 +52,10 @@ function init(){
 }
 
 
-//URL: gestisco i poster e movie_name
+/**
+ * Metodo per gestire il caricamento dei poster e il nome dei film.
+ * Il parametro preso in URL viene decodificato per mantenere l'integratezza
+ */
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const posterPath = params.get("poster");
@@ -57,7 +70,10 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-//RECENSIONE: caricamento
+/**
+ * Caricamento delle recensioni su mongoDBServer
+ * @returns {Promise<void>}
+ */
 async function loadReviews(){
     console.log("sono in load reviews");
     const movieName = document.getElementById("movie_name").textContent;
@@ -73,7 +89,10 @@ async function loadReviews(){
     renderReviews(reviews);
 }
 
-//RECENSIONE: creo l'oggetto
+/**
+ * Crea gli oggetti per ogni recensione per poi aggiungerlo alla vista in dettaglio dei film
+ * @param reviews elenco delle recensioni
+ */
 function renderReviews(reviews) {
     const container = document.getElementById("reviews_container");
     container.innerHTML = "";
@@ -101,7 +120,10 @@ function renderReviews(reviews) {
     });
 }
 
-/*CHAT: gestisco l'invio al server il messaggio*/
+/**
+ * Chiamato quando viene premuto il pulsante Invia. Ottiene il testo da inviare dall'interfaccia
+ * e invia il messaggio tramite socket.
+ */
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     if (chatText.trim() !== '') {
@@ -113,7 +135,9 @@ function sendChatText() {
     }
 }
 
-//CHAT: gestisco l'evento dell'invio del nuovo messaggio
+/**
+ * Gestisco l'invio di un messaggio
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const chatInput = document.getElementById('chat_input');
     if (chatInput) {
@@ -126,7 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/*CHAT: connessione socket.io e ridimensionamento vista*/
+/**
+ * Usato per connettersi a una stanza. Ottiene il nome utente e il numero della stanza dall'interfaccia.
+ */
 function connectToRoom() {
     roomNo = document.getElementById('movie_name').textContent;
     name = document.getElementById('name').value;
@@ -142,13 +168,15 @@ function connectToRoom() {
 
     setTimeout(() => { //timeout per dare il tempo alla conessione socket.io di connettersi ed elaborare i dati
 
-        hideLoginInterface(roomNo, name);
+        viewChatInterface(roomNo, name);
 
         writeOnHistory('<b>Ti sei unito alla stanza: ' + roomNo + '</b>', 'system');
     }, 300);
 }
 
-/*CHAT: chiude la chat e disconnette lo user dal socket.io*/
+/**
+ * Chiude l'interfaccia della chat e chiude il collegamento con socket.io
+ */
 function closeChat() {
 
     document.getElementById('chat_interface').style.display = 'none';
@@ -163,7 +191,10 @@ function closeChat() {
     socket.emit('leave', roomNo, name);
 }
 
-/*CHAT: scrivo i messaggi nella vista chat*/
+/**
+ * Aggiunge il testo HTML fornito al div della cronologia.
+ * @param text - il testo da aggiungere
+ */
 function writeOnHistory(text, type = 'system', sender = null) {
     let history = document.getElementById('history');
 
@@ -194,8 +225,12 @@ function writeOnHistory(text, type = 'system', sender = null) {
     history.scrollTop = history.scrollHeight;
 }
 
-/*CHAT: nascondo il login iniziale*/
-function hideLoginInterface(room, userId) {
+/**
+ * Mostra la chat, cambiando l'interfaccia della pagina
+ * @param room nome stanza della chat
+ * @param userId nome di chi si è collegato
+ */
+function viewChatInterface(room, userId) {
     document.getElementById('initial_form').style.display = 'none';
     document.getElementById('chat_interface').style.display = 'block';
     document.getElementById('movie_name_chat').innerHTML = 'CHAT: '+document.getElementById('movie_name').textContent;

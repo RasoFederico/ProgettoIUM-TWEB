@@ -91,7 +91,7 @@ function onListening() {
 
 
 /**
- adding socket.io
+ *  socket.io
  */
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
