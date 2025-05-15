@@ -4,11 +4,16 @@ const axios = require('axios');
 const {response} = require("express");
 
 
-/* GET home page. */
+/**
+ * GET homepage
+ */
 router.get('/', function(req, res, next) {
   res.render('pages/index', { projectname: 'Filmoteca' });
 });
 
+/**
+ * GET vista dei dettagli dei film
+ */
 router.get('/film', async function(req, res, next) {
   const description = req.query.description;
   const movie_id = req.query.movie_id;
@@ -29,6 +34,9 @@ router.get('/film', async function(req, res, next) {
   res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew });
 });
 
+/**
+ * GET films attraverso l'utilizzo del nome del film
+ */
 router.post('/get-movie-by-name', async function (req, res, next) {
   const {name} = req.body;
   try{
@@ -43,6 +51,9 @@ router.post('/get-movie-by-name', async function (req, res, next) {
     console.error(error.response?.data || error.message);  }
 })
 
+/**
+ * GET recensioni attraverso l'ulizzo del nome del film
+ */
 router.post('/load-reviews', async function(req, res, next) {
   const movieName = req.body.name;
   console.log("my movie revie "+movieName);
@@ -55,6 +66,9 @@ router.post('/load-reviews', async function(req, res, next) {
   }
 })
 
+/**
+ * GET film inizili homepage
+ */
 router.get('/load-movies', async function (req, res, next) {
   try{
     const response = await axios.get('http://localhost:8080/load-movies',{});

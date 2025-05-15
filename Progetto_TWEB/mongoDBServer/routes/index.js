@@ -6,6 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+/**
+ * GET reviews attraverso il nome del film
+ */
 router.post('/load-reviews', async function(req, res, next) {
   const movieName = req.body.movie_title;
   if (!movieName) {
