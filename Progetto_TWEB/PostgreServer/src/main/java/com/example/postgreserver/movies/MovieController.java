@@ -58,6 +58,9 @@ public class MovieController {
         List<String> crew = movieService.getCrew(movieId);
         List<String> genres = movieService.getGenres(movieId);
         MovieData data = new MovieData(actors, crew, genres);
+        System.out.println(data.getActors());
+        System.out.println(data.getCrew());
+        System.out.println(data.getGenres());
 
         return data;
     }
@@ -84,6 +87,30 @@ public class MovieController {
             this.actors = actors;
             this.crew = crew;
             this.genres = genres;
+        }
+
+        public void setActors(List<String> actors) {
+            this.actors = actors;
+        }
+
+        public void setCrew(List<String> crew) {
+            this.crew = crew;
+        }
+
+        public void setGenres(List<String> genres) {
+            this.genres = genres;
+        }
+
+        public List<String> getActors() {
+            return actors;
+        }
+
+        public List<String> getCrew() {
+            return crew;
+        }
+
+        public List<String> getGenres() {
+            return genres;
         }
     }
 

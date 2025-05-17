@@ -16,7 +16,9 @@ router.get('/', function(req, res, next) {
  */
 router.get('/film', async function(req, res, next) {
   const description = req.query.description;
-  const movie_id = req.query.movie_id;
+  let movie_id = req.query.movie_id;
+  movie_id=decodeURIComponent(movie_id);
+  console.log(movie_id);
   const tagline = req.query.tagline;
   const date = req.query.date;
   const minute = req.query.minute;
