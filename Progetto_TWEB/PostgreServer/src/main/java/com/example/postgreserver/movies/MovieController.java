@@ -38,31 +38,13 @@ public class MovieController {
         return movieService.findByTitle(name);
     }
 
-    /**
-     * Restituisce i nomi degli attori per un film specifico passandogli ID
-     * @param movieId id del film
-     * @return
-     */
-    @GetMapping("/get-actors-crew")
-    public List<String> getActorsCrew(@RequestParam int movieId){
-        List<String> actors = movieService.getActorsId(movieId);
-        List<String> crew = movieService.getCrew(movieId);
-        actors.add("///");
-        actors.addAll(crew);
-        return actors;
-    }
-
     @GetMapping("/get-actors-crew-genres")
     public MovieData getActorsCrewGenres(@RequestParam int movieId){
         List<String> actors = movieService.getActorsId(movieId);
         List<String> crew = movieService.getCrew(movieId);
         List<String> genres = movieService.getGenres(movieId);
-        MovieData data = new MovieData(actors, crew, genres);
-        System.out.println(data.getActors());
-        System.out.println(data.getCrew());
-        System.out.println(data.getGenres());
 
-        return data;
+        return new MovieData(actors, crew, genres);
     }
 
 

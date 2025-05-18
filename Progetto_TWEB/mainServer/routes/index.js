@@ -17,14 +17,15 @@ router.get('/', function(req, res, next) {
 router.get('/film', async function(req, res, next) {
   const description = req.query.description;
   let movie_id = req.query.movie_id;
-  movie_id=decodeURIComponent(movie_id);
-  console.log(movie_id);
+  let movie_name = req.query.movie_name;
+  movie_name=decodeURIComponent(movie_name);
   const tagline = req.query.tagline;
   const date = req.query.date;
   const minute = req.query.minute;
   let actors;
   let crew;
   let genres;
+  let oscar;
   try{
     const response = await axios.get("http://localhost:8080/get-actors-crew-genres?movieId="+movie_id);
     const data = response.data;
@@ -34,8 +35,14 @@ router.get('/film', async function(req, res, next) {
   }catch(error){
     console.error(error.response?.data || error.message);
   }
-  console.log(actors);
-  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres });
+
+  try{
+    const response = await axios.post("http://localhost:8080/won-oscar", {movie_name});
+    oscar=response.data;
+  }catch(error){}
+  console.log("oscar "+oscar);
+  if(oscar == null){oscar = false;}
+  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres, oscar : oscar});
 });
 
 /**
@@ -49,7 +56,6 @@ router.post('/get-movie-by-name', async function (req, res, next) {
         'Content-Type': 'application/json'
       }
     });
-    console.log(response.data);
     res.json(response.data);
   }catch(error){
     console.error(error.response?.data || error.message);  }
