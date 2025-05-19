@@ -25,7 +25,6 @@ router.get('/film', async function(req, res, next) {
   let actors;
   let crew;
   let genres;
-  let oscar;
   try{
     const response = await axios.get("http://localhost:8080/get-actors-crew-genres?movieId="+movie_id);
     const data = response.data;
@@ -35,14 +34,7 @@ router.get('/film', async function(req, res, next) {
   }catch(error){
     console.error(error.response?.data || error.message);
   }
-
-  try{
-    const response = await axios.post("http://localhost:8080/won-oscar", {movie_name});
-    oscar=response.data;
-  }catch(error){}
-  console.log("oscar "+oscar);
-  if(oscar == null){oscar = false;}
-  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres, oscar : oscar});
+  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres});
 });
 
 /**
@@ -59,6 +51,15 @@ router.post('/get-movie-by-name', async function (req, res, next) {
     res.json(response.data);
   }catch(error){
     console.error(error.response?.data || error.message);  }
+})
+
+router.get('/won-oscar', async function(req, res, next) {
+  let movie_name=req.query.movie_name;
+  movie_name = decodeURIComponent(movie_name);
+  try{
+    const response =await axios.post('http://localhost:8080/won-oscar',{movie_name});
+    res.json(response.data);
+  }catch(error){}
 })
 
 /**

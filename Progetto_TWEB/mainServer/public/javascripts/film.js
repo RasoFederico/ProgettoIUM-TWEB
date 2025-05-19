@@ -1,3 +1,5 @@
+
+
 let name = null;
 let roomNo = null;
 let socket = io();
@@ -51,6 +53,20 @@ function init(){
     });
 }
 
+async function getOscar(){
+    const params = new URLSearchParams(window.location.search);
+    let movie_name = params.get('movie_name');
+    let oscar;
+    try{
+        const response = await axios.get('/won-oscar?movie_name='+movie_name);
+        oscar = response.data;
+    }catch(error){}
+
+    if(oscar === true){
+        document.getElementById("oscar").src="data/oscar.png";
+    }
+}
+
 
 /**
  * Metodo per gestire il caricamento dei poster e il nome dei film.
@@ -68,6 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if(namePath) {
         document.getElementById("movie_name").innerHTML = decodeURIComponent(namePath);
     }
+    getOscar();
 });
 
 /**

@@ -15,7 +15,7 @@ public class OscarController {
     public Optional<Boolean> wonOscar(@RequestBody MovieRequest movie){
         Optional<Boolean> x = oscarService.wonOscar(movie.getMovie_name());
 
-        
+
         return x;
     }
 
