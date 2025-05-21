@@ -34,7 +34,7 @@ router.get('/film', async function(req, res, next) {
   }catch(error){
     console.error(error.response?.data || error.message);
   }
-  res.render('pages/film', { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres});
+  res.render(`pages/film`, { projectname: 'Filmoteca', description: description, date:date, minute:minute, tagline:tagline, actors: actors, crew: crew, genres : genres});
 });
 
 /**

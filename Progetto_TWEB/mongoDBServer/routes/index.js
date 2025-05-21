@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Reviews =require('../models/Reviews');
+const Chat = require('../models/Chat');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -24,6 +25,16 @@ router.post('/load-reviews', async function(req, res, next) {
      res.status(500).json({error: error});
   }
 
+})
+
+router.post('/save-chat-message', async function(req, res, next) {
+    try{
+        const newMessage = new Chat(req.body);
+        const savedMessage = await newMessage.save();
+        res.status(200).json(savedMessage);
+    }catch (error){
+        res.status(500).json({error: error});
+    }
 })
 
 module.exports = router;

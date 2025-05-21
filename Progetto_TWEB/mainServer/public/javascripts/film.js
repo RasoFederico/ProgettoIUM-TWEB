@@ -3,6 +3,7 @@
 let name = null;
 let roomNo = null;
 let socket = io();
+let movie_id;
 
 /**
  * Inizializza l'interfaccia utente e la configurazione della chat.
@@ -51,6 +52,7 @@ function init(){
             writeOnHistory(chatText, 'received', who); //riceve il messaggio di
         }
     });
+
 }
 
 async function getOscar(){
@@ -72,10 +74,10 @@ async function getOscar(){
  * Metodo per gestire il caricamento dei poster e il nome dei film.
  * Il parametro preso in URL viene decodificato per mantenere l'integratezza
  */
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async function(){
     const params = new URLSearchParams(window.location.search);
     const posterPath = params.get("poster");
-    const namePath = params.get("movie_name");
+    let namePath = params.get("movie_name");
     console.log(namePath);
 
     if (posterPath) {
@@ -83,6 +85,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     if(namePath) {
         document.getElementById("movie_name").innerHTML = decodeURIComponent(namePath);
+        namePath = decodeURIComponent(namePath);
+    }
+    try{
+        const response = await axios.post('/get-movie-by-name',{name:namePath});
+       console.log(response.data);
+    }catch(error){
+        console.error(error.response?.data || error.message);
     }
     getOscar();
 });

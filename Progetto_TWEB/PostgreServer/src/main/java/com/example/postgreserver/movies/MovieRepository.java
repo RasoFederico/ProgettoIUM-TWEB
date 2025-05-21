@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
@@ -17,6 +18,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("SELECT new com.example.postgreserver.MovieAndPoster(m, p) FROM Movie m JOIN Posters p ON m.id = p.id WHERE m.name = :title ORDER BY m.id LIMIT 5 OFFSET 0")
     List<MovieAndPoster> findByTitle(@Param("title") String title);
+
+    @Query("SELECT m.id FROM Movie m WHERE m.name=:title AND m.date=:year")
+    int extractId(@Param("title")String title,@Param("year") int year);
 
     @Query("SELECT a.name FROM Actor a WHERE a.id = :id")
     List<String> findActorsId(@Param("id") Integer id);
