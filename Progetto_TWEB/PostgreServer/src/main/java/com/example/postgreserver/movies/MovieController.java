@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.postgreserver.posters.Posters;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 public class MovieController {
     private MovieService movieService;
@@ -55,8 +57,8 @@ public class MovieController {
 
     public static class IdRequest{
         private String name;
-        private int year;
-        public IdRequest(String name, int year){
+        private String year;
+        public IdRequest(String name, String year){
             this.name = name;
             this.year = year;
         }
@@ -64,7 +66,7 @@ public class MovieController {
             return name;
         }
         public int getYear() {
-            return year;
+            return parseInt(year);
         }
     }
 

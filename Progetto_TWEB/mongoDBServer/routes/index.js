@@ -19,7 +19,7 @@ router.post('/load-reviews', async function(req, res, next) {
 
   try{
     const reviews = await Reviews.find({movie_title: movieName });
-    console.log(reviews);
+    //console.log(reviews);
      res.status(200).json(reviews);
   }catch(error){
      res.status(500).json({error: error});
@@ -33,6 +33,17 @@ router.post('/save-chat-message', async function(req, res, next) {
         const savedMessage = await newMessage.save();
         res.status(200).json(savedMessage);
     }catch (error){
+        res.status(500).json({error: error});
+    }
+})
+
+router.get('/get-messages', async function(req, res, next) {
+    const id=req.query.movie_id;
+    try{
+        const messages = await Chat.find({movie_id: id});
+        console.log(messages);
+        res.status(200).json(messages);
+    }catch(error){
         res.status(500).json({error: error});
     }
 })

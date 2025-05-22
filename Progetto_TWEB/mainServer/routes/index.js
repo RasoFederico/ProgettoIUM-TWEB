@@ -53,6 +53,20 @@ router.post('/get-movie-by-name', async function (req, res, next) {
     console.error(error.response?.data || error.message);  }
 })
 
+router.get('/get-id-by-name', async function (req, res, next) {
+  const year = req.query.year;
+  const name = decodeURIComponent(req.query.name);
+
+  try{
+    const response =await axios.post("http://localhost:8080/extract-id",{name, year});
+    console.log(response.data);
+    res.json(response.data);
+  }catch(error){
+    console.error(error.response?.data || error.message);
+  }
+
+})
+
 router.get('/won-oscar', async function(req, res, next) {
   let movie_name=req.query.movie_name;
   movie_name = decodeURIComponent(movie_name);
@@ -74,6 +88,28 @@ router.post('/load-reviews', async function(req, res, next) {
     res.json(response.data);
   }catch (error){
     res.json(error.response?.data || error.message);
+  }
+})
+
+router.post('/save-chat-message', async function(req, res, next) {
+  const movie_id=req.body.id;
+  const name = req.body.name;
+  const message = req.body.message;
+
+  try{
+    const response = axios.post('http://localhost:3002/save-chat-message',{movie_id:movie_id, name : name, text : message});
+  }catch(error){
+    console.error(error.response?.data || error.message);
+  }
+})
+
+router.get('/get-messages', async function(req, res, next){
+  const movie_id=req.query.movie_id;
+  try{
+    const response =await axios.get("http://localhost:3002/get-messages?movie_id="+movie_id);
+    res.json(response.data);
+  }catch(error){
+    console.error(error.response?.data || error.message);
   }
 })
 

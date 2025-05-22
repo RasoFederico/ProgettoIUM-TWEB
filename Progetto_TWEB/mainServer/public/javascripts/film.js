@@ -85,11 +85,12 @@ window.addEventListener("DOMContentLoaded", async function(){
     }
     if(namePath) {
         document.getElementById("movie_name").innerHTML = decodeURIComponent(namePath);
-        namePath = decodeURIComponent(namePath);
     }
+    const year=document.getElementById("year").textContent;
+    console.log(year);
     try{
-        const response = await axios.post('/get-movie-by-name',{name:namePath});
-       console.log(response.data);
+        const response = await axios.get(`/get-id-by-name?year=${year}&name=${namePath}`);
+       movie_id = response.data;
     }catch(error){
         console.error(error.response?.data || error.message);
     }
@@ -155,9 +156,19 @@ function sendChatText() {
     if (chatText.trim() !== '') {
 
         socket.emit('chat', roomNo, name, chatText); //invio al server il messaggio
+        saveMessage(chatText);
         console.log('Invia messaggio:', roomNo, name, chatText);
 
         document.getElementById('chat_input').value = ''; //pulisce il campo di testo
+    }
+}
+
+async function saveMessage(message) {
+    try{
+        const response = await axios.post('/save-chat-message', {id: movie_id, name: name, message: message});
+        console.log(respnse.data);
+    }catch(error){
+        console.error(error.response?.data || error.message);
     }
 }
 
@@ -251,6 +262,20 @@ function writeOnHistory(text, type = 'system', sender = null) {
     history.scrollTop = history.scrollHeight;
 }
 
+async function getMessages(){
+    try{
+        const response = await axios.get('/get-messages?movie_id='+movie_id);
+        const messages = response.data;
+
+        messages.forEach(message => {
+            writeOnHistory(message.text,"received" ,message.name)
+        })
+
+    }catch(error){
+        console.error(error.response?.data || error.message);
+    }
+}
+
 /**
  * Mostra la chat, cambiando l'interfaccia della pagina
  * @param room nome stanza della chat
@@ -261,4 +286,6 @@ function viewChatInterface(room, userId) {
     document.getElementById('chat_interface').style.display = 'block';
     document.getElementById('movie_name_chat').innerHTML = 'CHAT: '+document.getElementById('movie_name').textContent;
     document.getElementById('who_you_are').innerHTML = userId;
+    getMessages();
+
 }
