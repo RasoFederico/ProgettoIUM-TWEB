@@ -18,6 +18,7 @@ let movie_id;
  */
 function init(){
 
+    setNoneNavbarSearch();
     loadReviews(); //gestisce le recensioni
 
     document.getElementById('initial_form').style.display = 'block';
@@ -53,6 +54,10 @@ function init(){
         }
     });
 
+}
+
+function setNoneNavbarSearch(){
+    document.getElementById('container_search').style.display = 'none';
 }
 
 async function getOscar(){

@@ -1,5 +1,8 @@
 //INIZIALIZZAZIONE HOMEPAGE
 function init(){
+
+    setBlockNavbarSearch();
+
     try{
         axios.get("/load-movies")
             .then (response => {
@@ -12,6 +15,10 @@ function init(){
     }catch(e){
         console.log(e);
     }
+}
+
+function setBlockNavbarSearch(){
+    document.getElementById('container_search').style.display = 'block';
 }
 
 
