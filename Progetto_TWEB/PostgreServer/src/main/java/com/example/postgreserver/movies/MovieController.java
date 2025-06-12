@@ -31,14 +31,14 @@ public class MovieController {
 
     /**
      * Restituisce la lista dei film con i relativi poster attraverso una ricerca per nome
-     * @param receivedMovie nome del film
+     * @param movieName nome del film
      * @return
      */
-    @PostMapping("/get-movie-by-name")
-    public List<MovieAndPoster> getMovieByName(@RequestBody MovieRequest receivedMovie){
-        String name = receivedMovie.getName();
-        System.out.println("Titolo ricevuto: " + name);
-        return movieService.findByTitle(name);
+    @GetMapping("/get-movie-by-name")
+    public List<MovieAndPoster> getMovieByName(@RequestParam String movieName){
+
+        System.out.println("Titolo ricevuto: " + movieName);
+        return movieService.findByTitle(movieName);
     }
 
     @PostMapping("/extract-id")
@@ -70,17 +70,7 @@ public class MovieController {
         }
     }
 
-    public static class MovieRequest{
-        private String name;
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
 
     public static class MovieData{
         private List<String> actors;

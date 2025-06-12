@@ -26,12 +26,7 @@ function askForFilm (event){
     const input = document.getElementById("search_input");
     const data = input.value;
     try{
-        axios.post('/get-movie-by-name', { name: data }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
+        axios.get(`/get-movie-by-name?movie_name=${encodeURIComponent(data)}`)
             .then(response => {
                 console.log("Risposta completa:", response);
 

@@ -40,14 +40,10 @@ router.get('/film', async function(req, res, next) {
 /**
  * GET films attraverso l'utilizzo del nome del film
  */
-router.post('/get-movie-by-name', async function (req, res, next) {
-  const {name} = req.body;
+router.get('/get-movie-by-name', async function (req, res, next) {
+  const name = req.query.movie_name;
   try{
-    const response = await axios.post('http://localhost:8080/get-movie-by-name',{name},{
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await axios.get(`http://localhost:8080/get-movie-by-name?movieName=${name}`);
     res.json(response.data);
   }catch(error){
     console.error(error.response?.data || error.message);  }
@@ -81,10 +77,8 @@ router.get('/won-oscar', async function(req, res, next) {
  */
 router.post('/load-reviews', async function(req, res, next) {
   const movieName = req.body.name;
-  //console.log("my movie revie "+movieName);
   try{
     const response = await axios.post('http://localhost:3002/load-reviews', {movie_title : movieName});
-    //console.log(response.data);
     res.json(response.data);
   }catch (error){
     res.json(error.response?.data || error.message);
