@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Releases {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long r_id;
 
     private int id;

@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Genres {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long g_id;
 
     private int id;

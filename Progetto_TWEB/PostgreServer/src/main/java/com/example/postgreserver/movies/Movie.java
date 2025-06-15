@@ -6,14 +6,11 @@ import jakarta.persistence.*;
 @Entity
 @Table
 public class Movie {
-
-    private Integer id;
-    private Integer minute;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long m_id;
 
+    private int id;
+    private int minute;
     private String date;
     private String name;
     private String rating;
@@ -39,9 +36,9 @@ public class Movie {
         this.id = id;
     }
 
-    public void setM_id(Long m_id) {
+    /*public void setM_id(Long m_id) {
         this.m_id = m_id;
-    }
+    }*/
 
     public void setName(String name) {
         this.name = name;
@@ -71,9 +68,9 @@ public class Movie {
         return id;
     }
 
-    public Long getM_id() {
+    /*public Long getM_id() {
         return m_id;
-    }
+    }*/
 
     public String getName() {
         return name;

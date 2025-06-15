@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Actor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long a_id;
 
     private int id;

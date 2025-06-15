@@ -25,6 +25,8 @@ dependencies {
 	// PostgreSQL Driver
 	runtimeOnly 'org.postgresql:postgresql:42.7.3'
 
+	implementation 'org.jboss.logging:jboss-logging:3.5.0.Final'
+
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

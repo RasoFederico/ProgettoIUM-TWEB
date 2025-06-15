@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", async function(){
     const params = new URLSearchParams(window.location.search);
     const posterPath = params.get("poster");
     let namePath = params.get("movie_name");
-    console.log(namePath);
+    movie_id = params.get("movie_id");
 
     if (posterPath) {
         document.getElementById("poster").src = decodeURIComponent(posterPath);
@@ -91,14 +91,7 @@ window.addEventListener("DOMContentLoaded", async function(){
     if(namePath) {
         document.getElementById("movie_name").innerHTML = decodeURIComponent(namePath);
     }
-    const year=document.getElementById("year").textContent;
-    console.log(year);
-    try{
-        const response = await axios.get(`/get-id-by-name?year=${year}&name=${namePath}`);
-       movie_id = response.data;
-    }catch(error){
-        console.error(error.response?.data || error.message);
-    }
+
     getOscar();
 });
 
@@ -112,7 +105,7 @@ async function loadReviews(){
     console.log(movieName);
     let reviews;
     try{
-        const response = await axios.post('/load-reviews',{name: movieName} );
+        const response = await axios.get(`/load-reviews?name=${encodeURIComponent(movieName)}`, );
         reviews = response.data;
         console.log(reviews);
     }catch(error){

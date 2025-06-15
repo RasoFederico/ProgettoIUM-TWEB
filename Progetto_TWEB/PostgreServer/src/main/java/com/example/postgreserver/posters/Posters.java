@@ -9,7 +9,6 @@ public class Posters {
     private int id;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long p_id;
 
     @Column(columnDefinition = "TEXT")

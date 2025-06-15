@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Crew {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long c_id;
     private int id;
     private String role;

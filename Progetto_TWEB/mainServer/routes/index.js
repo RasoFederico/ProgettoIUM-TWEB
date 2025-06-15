@@ -75,10 +75,10 @@ router.get('/won-oscar', async function(req, res, next) {
 /**
  * GET recensioni attraverso l'ulizzo del nome del film
  */
-router.post('/load-reviews', async function(req, res, next) {
-  const movieName = req.body.name;
+router.get('/load-reviews', async function(req, res, next) {
+  const movieName = req.query.name;
   try{
-    const response = await axios.post('http://localhost:3002/load-reviews', {movie_title : movieName});
+    const response = await axios.get(`http://localhost:3002/load-reviews?movie_name=${movieName}`);
     res.json(response.data);
   }catch (error){
     res.json(error.response?.data || error.message);

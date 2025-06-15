@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 public class Oscar {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long o_id;
     private int yearFilm;
     private int yearCeremony;

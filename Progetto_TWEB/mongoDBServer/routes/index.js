@@ -11,15 +11,15 @@ router.get('/', function(req, res, next) {
 /**
  * GET reviews attraverso il nome del film
  */
-router.post('/load-reviews', async function(req, res, next) {
-  const movieName = req.body.movie_title;
+router.get('/load-reviews', async function(req, res, next) {
+  const movieName = req.query.movie_name;
   if (!movieName) {
    res.status(400).json({ error: 'nome del film mancante' });
   }
 
   try{
-    const reviews = await Reviews.find({movie_title: movieName });
-    //console.log(reviews);
+    const reviews = await Reviews.find({movie_title: decodeURIComponent(movieName) });
+    console.log(reviews);
      res.status(200).json(reviews);
   }catch(error){
      res.status(500).json({error: error});
