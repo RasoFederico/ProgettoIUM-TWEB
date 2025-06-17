@@ -44,13 +44,13 @@ function init(){
         }
     });
 
-    socket.on('chat', function (room, userId, chatText) {
+    socket.on('chat', function (room, userId, chatText, top_critic = false) {
         console.log('Chat riceve evento:', room, userId, chatText);
         let who = userId;
         if (userId === name) {
-            writeOnHistory(chatText, 'sent', 'Tu'); //scrive l'utente registrato
+            writeOnHistory(chatText, 'sent', 'Tu', top_critic); //scrive l'utente registrato
         } else {
-            writeOnHistory(chatText, 'received', who); //riceve il messaggio di
+            writeOnHistory(chatText, 'received', who, top_critic); //riceve il messaggio di
         }
     });
 
@@ -146,14 +146,15 @@ function renderReviews(reviews) {
 }
 
 /**
- * Chiamato quando viene premuto il pulsante Invia. Ottiene il testo da inviare dall'interfaccia
- * e invia il messaggio tramite socket.
+ * Chiamato quando viene premuto il pulsante Invia. Ottiene il testo da inviare dall'nterfaccia
+ * e invia il messaggio traimite socket.
  */
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
+    const checkbox = document.getElementById('topCritic');
     if (chatText.trim() !== '') {
 
-        socket.emit('chat', roomNo, name, chatText); //invio al server il messaggio
+        socket.emit('chat', roomNo, name, chatText, checkbox.checked); //invio al server il messaggio
         saveMessage(chatText);
         console.log('Invia messaggio:', roomNo, name, chatText);
 
@@ -162,9 +163,11 @@ function sendChatText() {
 }
 
 async function saveMessage(message) {
+    const checkbox = document.getElementById('topCritic');
+    const top_critic = checkbox.checked;
     try{
-        const response = await axios.post('/save-chat-message', {id: movie_id, name: name, message: message});
-        console.log(respnse.data);
+        const response = await axios.post('/save-chat-message', {id: movie_id, name: name, message: message, top_critic: top_critic});
+        console.log(response.data);
     }catch(error){
         console.error(error.response?.data || error.message);
     }
@@ -229,8 +232,11 @@ function closeChat() {
 /**
  * Aggiunge il testo HTML fornito al div della cronologia.
  * @param text - il testo da aggiungere
+ * @param type
+ * @param sender
+ * @param top_critic
  */
-function writeOnHistory(text, type = 'system', sender = null) {
+function writeOnHistory(text, type = 'system', sender = null, top_critic = false) {
     let history = document.getElementById('history');
 
     if (type === 'system') {
@@ -242,8 +248,7 @@ function writeOnHistory(text, type = 'system', sender = null) {
         let messageContainer = document.createElement('div');
         messageContainer.className = 'clearfix';
 
-        let messageDiv = document.createElement('div');
-        messageDiv.className = type === 'sent' ? 'chat-message chat-message-sent' : 'chat-message chat-message-received';
+        let messageDiv =topCriticMessage(type, top_critic);
 
         let contentDiv = document.createElement('div');
         contentDiv.textContent = text;
@@ -260,13 +265,23 @@ function writeOnHistory(text, type = 'system', sender = null) {
     history.scrollTop = history.scrollHeight;
 }
 
+function topCriticMessage(type, top_critic){
+    let messageDiv = document.createElement('div');
+    if(top_critic){
+        messageDiv.className = type === 'sent' ? 'chat-message top-critic-message-sent' : 'chat-message top-critic-message-received';
+    }else{
+        messageDiv.className = type === 'sent' ? 'chat-message chat-message-sent' : 'chat-message chat-message-received';
+    }
+    return messageDiv;
+}
+
 async function getMessages(){
     try{
         const response = await axios.get('/get-messages?movie_id='+movie_id);
         const messages = response.data;
 
         messages.forEach(message => {
-            writeOnHistory(message.text,"received" ,message.name)
+            writeOnHistory(message.text,"received" ,message.name, message.top_critic);
         })
 
     }catch(error){

@@ -89,9 +89,10 @@ router.post('/save-chat-message', async function(req, res, next) {
   const movie_id=req.body.id;
   const name = req.body.name;
   const message = req.body.message;
+  const top_critic = req.body.top_critic;
 
   try{
-    const response = axios.post('http://localhost:3002/save-chat-message',{movie_id:movie_id, name : name, text : message});
+    const response = axios.post('http://localhost:3002/save-chat-message',{movie_id:movie_id, name : name, text : message, top_critic : top_critic});
   }catch(error){
     console.error(error.response?.data || error.message);
   }
