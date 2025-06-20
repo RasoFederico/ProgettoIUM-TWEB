@@ -167,7 +167,6 @@ async function saveMessage(message) {
     const top_critic = checkbox.checked;
     try{
         const response = await axios.post('/save-chat-message', {id: movie_id, name: name, message: message, top_critic: top_critic});
-        console.log(response.data);
     }catch(error){
         console.error(error.response?.data || error.message);
     }

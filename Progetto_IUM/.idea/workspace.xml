@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c82ac67e-fbb1-4343-966d-9c5b34963965" name="Changes" comment="prove git" />
+    <list default="true" id="c82ac67e-fbb1-4343-966d-9c5b34963965" name="Changes" comment="prove git">
+      <change beforePath="$PROJECT_DIR$/.idea/IUM-Progect.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IUM-Progect.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,8 +51,9 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/feder/Desktop/progetto_IUM_TWEB/Progetto_IUM&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/programmi/PuliziaECaricamento/Data&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -57,11 +63,16 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\programmi\PuliziaECaricamento\Data" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
-        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.220" />
+        <option value="bundled-python-sdk-0fc6c617c4bd-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
@@ -78,6 +89,12 @@
       <workItem from="1734721094769" duration="106000" />
       <workItem from="1734721245683" duration="1254000" />
       <workItem from="1734722543723" duration="725000" />
+      <workItem from="1748463756355" duration="1144000" />
+      <workItem from="1748799008924" duration="2270000" />
+      <workItem from="1749742858869" duration="5098000" />
+      <workItem from="1749828246583" duration="9902000" />
+      <workItem from="1750001094124" duration="5029000" />
+      <workItem from="1750084512526" duration="2368000" />
     </task>
     <task id="LOCAL-00001" summary="analizzo i dati">
       <option name="closed" value="true" />
