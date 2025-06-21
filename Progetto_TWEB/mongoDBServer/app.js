@@ -1,70 +1,106 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
+//----------------
+// Import moduli core
+//----------------
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
+//----------------
+// Import moduli database
+//----------------
+const mongoose = require('mongoose');
 
+//----------------
+// Import moduli Swagger
+//----------------
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
-const mongoDB = 'mongodb://localhost:27017/reviews';
+//----------------
+// Import router
+//----------------
+const indexRouter = require('./routes/index');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//----------------
+// Inizializza app Express
+//----------------
+const app = express();
 
-var app = express();
-
-// view engine setup
+//----------------
+// Impostazioni del motore di viste
+//----------------
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+//----------------
+// Middleware standard
+//----------------
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//----------------
+// Swagger configuration
+//----------------
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Main Server',
+            version: '5.0.1',
+            description: 'Documentazione API della Filmoteca',
+        },
+    },
+    apis: ['./routes/*.js'], // File da analizzare per Swagger JSDoc
+};
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+//----------------
+// Connessione a MongoDB
+//----------------
+const mongoDB = 'mongodb://localhost:27017/reviews';
 
 mongoose.Promise = global.Promise;
 
-connection = mongoose.connect(mongoDB, {
-  checkServerIdentity: true,
-})
-    .then(()=>{
-      console.log('MongoDB connection started!');
+mongoose.connect(mongoDB, { checkServerIdentity: true })
+    .then(() => {
+        console.log('MongoDB connection started!');
     })
-    .catch((err)=>{
-      console.log('MongoDB connection failed!'+JSON.stringify(err));
-    })
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    .catch((err) => {
+        console.error('MongoDB connection failed! ' + JSON.stringify(err));
+    });
+//----------------
+// Routes
+//----------------
+app.use('/', indexRouter);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+//----------------
+// Gestione 404 (not found)
+//----------------
+app.use(function (req, res, next) {
+    next(createError(404));
 });
 
+//----------------
+// Gestione errori
+//----------------
+app.use(function (err, req, res, next) {
+    // Mostra dettagli errore solo in sviluppo
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+    // Rende la pagina di errore
+    res.status(err.status || 500);
+    res.render('error');
+});
 
+//----------------
+// Esporta l'app
+//----------------
 module.exports = app;

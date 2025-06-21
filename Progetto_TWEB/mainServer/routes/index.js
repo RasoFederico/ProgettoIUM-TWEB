@@ -99,7 +99,7 @@ router.get('/film', async function(req, res, next) {
  * /get-movie-by-name:
  *   get:
  *     summary: Ottiene un film per nome
- *     description: Restituisce i dettagli di un film recuperandoli da un microservizio, dato il nome del film come parametro di query.
+ *     description: Restituisce i dettagli di un film recuperandoli dal database in Postgres, dato il nome del film come parametro di query.
  *     parameters:
  *       - in: query
  *         name: movie_name
@@ -116,7 +116,7 @@ router.get('/film', async function(req, res, next) {
  *               type: object
  *               additionalProperties: true
  *       500:
- *         description: Errore nel recupero dei dati dal microservizio
+ *         description: Errore nel recupero dei dati dal PostgresServer
  */
 router.get('/get-movie-by-name', async function (req, res, next) {
   const name = req.query.movie_name;
@@ -132,7 +132,7 @@ router.get('/get-movie-by-name', async function (req, res, next) {
  * /won-oscar:
  *   get:
  *     summary: Verifica se un film ha vinto un Oscar
- *     description: Verifica se un film ha ricevuto un premio Oscar, passando il nome del film come parametro di query.
+ *     description: Verifica se un film ha ricevuto un premio Oscar, passando il nome del film come parametro di query e ricercando l'informazione nel database in Postgres.
  *     parameters:
  *       - in: query
  *         name: movie_name
@@ -150,7 +150,7 @@ router.get('/get-movie-by-name', async function (req, res, next) {
  *               example:
  *                 wonOscar: true
  *       500:
- *         description: Errore nel recupero dei dati o comunicazione col microservizio
+ *         description: Errore nel recupero dei dati o comunicazione con il PostgresServer
  */
 router.get('/won-oscar', async function(req, res, next) {
   let movie_name=req.query.movie_name;
@@ -166,7 +166,7 @@ router.get('/won-oscar', async function(req, res, next) {
  * /load-reviews:
  *   get:
  *     summary: Ottiene recensioni di un film
- *     description: Recupera tutte le recensioni associate a un film specifico, dato il suo nome come parametro di query.
+ *     description: Recupera tutte le recensioni associate a un film specifico, richiedendole al database in mongodb.
  *     parameters:
  *       - in: query
  *         name: name
@@ -187,7 +187,7 @@ router.get('/won-oscar', async function(req, res, next) {
  *                   link:
  *                     type: string
  *                     description: URL alla recensione originale
- *                     example: "https://example.com/review123"
+ *                     example: "m/0814255"
  *                   movie_title:
  *                     type: string
  *                     description: Titolo del film
@@ -224,15 +224,7 @@ router.get('/won-oscar', async function(req, res, next) {
  *                     example: "Un film sorprendente, visivamente impeccabile e narrativamente solido."
  *       500:
  *         description: Errore nel recupero delle recensioni
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Errore durante la richiesta al microservizio
- */
+*/
 router.get('/load-reviews', async function(req, res, next) {
   const movieName = req.query.name;
   try{
@@ -299,14 +291,6 @@ router.get('/load-reviews', async function(req, res, next) {
  *                   example: true
  *       500:
  *         description: Errore durante il salvataggio del messaggio
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Connection refused: microservice at localhost:3002 is unavailable"
  */
 router.post('/save-chat-message', async function(req, res, next) {
   const movie_id=req.body.id;
@@ -326,7 +310,7 @@ router.post('/save-chat-message', async function(req, res, next) {
  * /get-messages:
  *   get:
  *     summary: Recupera tutti i messaggi di chat per un film
- *     description: Ottiene la lista dei messaggi associati a uno specifico film, utilizzando il suo ID come parametro di query.
+ *     description: Ottiene la lista dei messaggi associati a uno specifico film, richiedendoli al database in mongodb.
  *     parameters:
  *       - in: query
  *         name: movie_id
@@ -358,14 +342,6 @@ router.post('/save-chat-message', async function(req, res, next) {
  *                     example: false
  *       500:
  *         description: Errore durante il recupero dei messaggi
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Microservice error: Cannot connect to http://localhost:3002"
  */
 router.get('/get-messages', async function(req, res, next){
   const movie_id=req.query.movie_id;
@@ -382,7 +358,7 @@ router.get('/get-messages', async function(req, res, next){
  * /load-movies:
  *   get:
  *     summary: Carica i film iniziali per la homepage
- *     description: Recupera un elenco di film da mostrare nella homepage, effettuando una richiesta a un microservizio backend.
+ *     description: Recupera un elenco di film da mostrare nella homepage, richiedendoli al database in Postgres.
  *     responses:
  *       200:
  *         description: Lista dei film iniziali caricata con successo
@@ -413,14 +389,6 @@ router.get('/get-messages', async function(req, res, next){
  *                     example: 8.7
  *       500:
  *         description: Errore durante il caricamento dei film iniziali
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Request failed with status code 500: Internal Server Error"
  */
 router.get('/load-movies', async function (req, res, next) {
   try{

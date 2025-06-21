@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+
 
 const app = express();
 
@@ -52,10 +52,9 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // -------------------
-// Rotte
+// Routes
 // -------------------
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // -------------------
 // Gestione errori

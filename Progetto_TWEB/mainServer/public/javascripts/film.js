@@ -1,94 +1,81 @@
-
-
 let name = null;
 let roomNo = null;
 let socket = io();
 let movie_id;
 
 /**
- * Inizializza l'interfaccia utente e la configurazione della chat.
- *
- * - Carica le recensioni tramite loadReviews().
- * - Mostra il form iniziale e nasconde l'interfaccia della chat.
- * - Modifica le classi CSS dell'elemento contenente i dettagli del film per adattare la larghezza.
- * - Configura gli event listener di Socket.IO per:
- *      - Connessione (connect): logga l'ID del socket.
- *      - Evento joined: notifica quando un utente entra nella stanza.
- *      - Evento chat: gestisce la ricezione dei messaggi di chat, distinguendo messaggi inviati e ricevuti.
+ * Inizializza l'applicazione:
+ * - Configura l'interfaccia utente.
+ * - Carica le recensioni del film.
+ * - Gestisce la connessione e gli eventi della chat tramite Socket.IO.
  */
-function init(){
-
+function init() {
     setNoneNavbarSearch();
-    loadReviews(); //gestisce le recensioni
+    loadReviews();
 
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
     const movieDetailsElement = document.querySelector('.col-md-6');
     if (movieDetailsElement) {
-        movieDetailsElement.classList.remove('col-md-6');
-        movieDetailsElement.classList.add('col-md-10');
+        movieDetailsElement.classList.replace('col-md-6', 'col-md-10');
     }
 
-    //Chat socket.io
-    socket.on('connect', function() {
+    socket.on('connect', function () {
         console.log('Connessione a socket.io con ID:', socket.id);
     });
 
     socket.on('joined', function (room, userId) {
         console.log('Evento di:', room, userId, 'Utente attuale:', name);
-        if (userId === name) {
-            console.log('Stesso utente');
-        } else {
-            writeOnHistory('<b>'+userId+'</b>' + ' entra nella stanza ' + room, 'system');
+        if (userId !== name) {
+            writeOnHistory('<b>' + userId + '</b> entra nella stanza ' + room, 'system');
         }
     });
 
     socket.on('chat', function (room, userId, chatText, top_critic = false) {
         console.log('Chat riceve evento:', room, userId, chatText);
-        let who = userId;
-        if (userId === name) {
-            writeOnHistory(chatText, 'sent', 'Tu', top_critic); //scrive l'utente registrato
-        } else {
-            writeOnHistory(chatText, 'received', who, top_critic); //riceve il messaggio di
-        }
+        const sender = userId === name ? 'Tu' : userId;
+        const type = userId === name ? 'sent' : 'received';
+        writeOnHistory(chatText, type, sender, top_critic);
     });
-
 }
 
-function setNoneNavbarSearch(){
+/**
+ * Nasconde il campo di ricerca nella navbar.
+ */
+function setNoneNavbarSearch() {
     document.getElementById('container_search').style.display = 'none';
 }
 
-async function getOscar(){
+/**
+ * Verifica se il film ha vinto un Oscar e, in caso positivo, mostra l'immagine del premio.
+ */
+async function getOscar() {
     const params = new URLSearchParams(window.location.search);
     let movie_name = params.get('movie_name');
-    let oscar;
-    try{
-        const response = await axios.get('/won-oscar?movie_name='+movie_name);
-        oscar = response.data;
-    }catch(error){}
-
-    if(oscar === true){
-        document.getElementById("oscar").src="data/oscar.png";
+    try {
+        const response = await axios.get('/won-oscar?movie_name=' + movie_name);
+        if (response.data === true) {
+            document.getElementById("oscar").src = "data/oscar.png";
+        }
+    } catch (error) {
+        console.error(error);
     }
 }
 
-
 /**
- * Metodo per gestire il caricamento dei poster e il nome dei film.
- * Il parametro preso in URL viene decodificato per mantenere l'integratezza
+ * All'avvio della pagina, imposta poster e nome del film, quindi verifica l'Oscar.
  */
-window.addEventListener("DOMContentLoaded", async function(){
+window.addEventListener("DOMContentLoaded", async function () {
     const params = new URLSearchParams(window.location.search);
     const posterPath = params.get("poster");
-    let namePath = params.get("movie_name");
+    const namePath = params.get("movie_name");
     movie_id = params.get("movie_id");
 
     if (posterPath) {
         document.getElementById("poster").src = decodeURIComponent(posterPath);
     }
-    if(namePath) {
+    if (namePath) {
         document.getElementById("movie_name").innerHTML = decodeURIComponent(namePath);
     }
 
@@ -96,27 +83,21 @@ window.addEventListener("DOMContentLoaded", async function(){
 });
 
 /**
- * Caricamento delle recensioni su mongoDBServer
- * @returns {Promise<void>}
+ * Carica le recensioni relative al film corrente da MongoDB.
  */
-async function loadReviews(){
-    console.log("sono in load reviews");
+async function loadReviews() {
     const movieName = document.getElementById("movie_name").textContent;
-    console.log(movieName);
-    let reviews;
-    try{
-        const response = await axios.get(`/load-reviews?name=${encodeURIComponent(movieName)}`, );
-        reviews = response.data;
-        console.log(reviews);
-    }catch(error){
+    try {
+        const response = await axios.get(`/load-reviews?name=${encodeURIComponent(movieName)}`);
+        renderReviews(response.data);
+    } catch (error) {
         console.error(error);
     }
-    renderReviews(reviews);
 }
 
 /**
- * Crea gli oggetti per ogni recensione per poi aggiungerlo alla vista in dettaglio dei film
- * @param reviews elenco delle recensioni
+ * Mostra le recensioni nella sezione dedicata.
+ * @param {Array<Object>} reviews - Lista delle recensioni da visualizzare.
  */
 function renderReviews(reviews) {
     const container = document.getElementById("reviews_container");
@@ -139,46 +120,52 @@ function renderReviews(reviews) {
                     </div>
                     <p class="review-text mt-2">${review.review_content}</p>
                 </div>
-            </div> 
-        `;
+            </div>`;
         container.appendChild(reviewElement);
     });
 }
 
 /**
- * Chiamato quando viene premuto il pulsante Invia. Ottiene il testo da inviare dall'nterfaccia
- * e invia il messaggio traimite socket.
+ * Invia un messaggio di chat tramite Socket.IO e lo salva nel database.
  */
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     const checkbox = document.getElementById('topCritic');
+
     if (chatText.trim() !== '') {
-
-        socket.emit('chat', roomNo, name, chatText, checkbox.checked); //invio al server il messaggio
+        socket.emit('chat', roomNo, name, chatText, checkbox.checked);
         saveMessage(chatText);
-        console.log('Invia messaggio:', roomNo, name, chatText);
-
-        document.getElementById('chat_input').value = ''; //pulisce il campo di testo
+        document.getElementById('chat_input').value = '';
     }
 }
 
+/**
+ * Salva un messaggio di chat sul server.
+ * @param {string} message - Il contenuto del messaggio da salvare.
+ */
 async function saveMessage(message) {
     const checkbox = document.getElementById('topCritic');
     const top_critic = checkbox.checked;
-    try{
-        const response = await axios.post('/save-chat-message', {id: movie_id, name: name, message: message, top_critic: top_critic});
-    }catch(error){
+
+    try {
+        await axios.post('/save-chat-message', {
+            id: movie_id,
+            name: name,
+            message: message,
+            top_critic: top_critic
+        });
+    } catch (error) {
         console.error(error.response?.data || error.message);
     }
 }
 
 /**
- * Gestisco l'invio di un messaggio
+ * Permette l'invio del messaggio con il tasto Enter.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const chatInput = document.getElementById('chat_input');
     if (chatInput) {
-        chatInput.addEventListener('keypress', function(e) {
+        chatInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 sendChatText();
@@ -188,71 +175,64 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Usato per connettersi a una stanza. Ottiene il nome utente e il numero della stanza dall'interfaccia.
+ * Connette l'utente a una stanza di chat, crea la stanza se non esiste.
  */
 function connectToRoom() {
     roomNo = document.getElementById('movie_name').textContent;
-    name = document.getElementById('name').value;
-    if (!name) name = 'Unknown-' + Math.random();
+    name = document.getElementById('name').value || 'Unknown-' + Math.random();
 
     const movieDetailsElement = document.querySelector('.col-md-10');
     if (movieDetailsElement) {
-        movieDetailsElement.classList.remove('col-md-10');
-        movieDetailsElement.classList.add('col-md-6');
+        movieDetailsElement.classList.replace('col-md-10', 'col-md-6');
     }
 
-    socket.emit('create or join', roomNo, name); //creo la stanza
+    socket.emit('create or join', roomNo, name);
 
-    setTimeout(() => { //timeout per dare il tempo alla conessione socket.io di connettersi ed elaborare i dati
-
+    setTimeout(() => {
         viewChatInterface(roomNo, name);
-
         writeOnHistory('<b>Ti sei unito alla stanza: ' + roomNo + '</b>', 'system');
     }, 300);
 }
 
 /**
- * Chiude l'interfaccia della chat e chiude il collegamento con socket.io
+ * Chiude la chat e torna all'interfaccia iniziale.
  */
 function closeChat() {
-
     document.getElementById('chat_interface').style.display = 'none';
     document.getElementById('initial_form').style.display = 'block';
 
     const movieDetailsElement = document.querySelector('.col-md-6');
     if (movieDetailsElement) {
-        movieDetailsElement.classList.remove('col-md-6');
-        movieDetailsElement.classList.add('col-md-10');
+        movieDetailsElement.classList.replace('col-md-6', 'col-md-10');
     }
 
     socket.emit('leave', roomNo, name);
 }
 
 /**
- * Aggiunge il testo HTML fornito al div della cronologia.
- * @param text - il testo da aggiungere
- * @param type
- * @param sender
- * @param top_critic
+ * Aggiunge un messaggio alla cronologia della chat.
+ * @param {string} text - Il testo del messaggio.
+ * @param {'sent'|'received'|'system'} type - Il tipo di messaggio.
+ * @param {string|null} sender - Nome del mittente.
+ * @param {boolean} top_critic - Indica se il mittente è un top critic.
  */
 function writeOnHistory(text, type = 'system', sender = null, top_critic = false) {
-    let history = document.getElementById('history');
+    const history = document.getElementById('history');
 
     if (type === 'system') {
-        let paragraph = document.createElement('p');
+        const paragraph = document.createElement('p');
         paragraph.className = 'text-center text-muted small';
         paragraph.innerHTML = text;
         history.appendChild(paragraph);
     } else {
-        let messageContainer = document.createElement('div');
+        const messageContainer = document.createElement('div');
         messageContainer.className = 'clearfix';
 
-        let messageDiv =topCriticMessage(type, top_critic);
-
-        let contentDiv = document.createElement('div');
+        const messageDiv = topCriticMessage(type, top_critic);
+        const contentDiv = document.createElement('div');
         contentDiv.textContent = text;
 
-        let timeDiv = document.createElement('div');
+        const timeDiv = document.createElement('div');
         timeDiv.className = type === 'sent' ? 'chat-time sent-time' : 'chat-time';
         timeDiv.textContent = sender;
 
@@ -261,43 +241,51 @@ function writeOnHistory(text, type = 'system', sender = null, top_critic = false
         messageContainer.appendChild(messageDiv);
         history.appendChild(messageContainer);
     }
+
     history.scrollTop = history.scrollHeight;
 }
 
-function topCriticMessage(type, top_critic){
-    let messageDiv = document.createElement('div');
-    if(top_critic){
+/**
+ * Crea l'elemento HTML per il messaggio in base allo stile (top critic o meno).
+ * @param {'sent'|'received'} type - Tipo di messaggio.
+ * @param {boolean} top_critic - Se è stato inviato da un top critic.
+ * @returns {HTMLDivElement} Elemento messaggio.
+ */
+function topCriticMessage(type, top_critic) {
+    const messageDiv = document.createElement('div');
+    if (top_critic) {
         messageDiv.className = type === 'sent' ? 'chat-message top-critic-message-sent' : 'chat-message top-critic-message-received';
-    }else{
+    } else {
         messageDiv.className = type === 'sent' ? 'chat-message chat-message-sent' : 'chat-message chat-message-received';
     }
     return messageDiv;
 }
 
-async function getMessages(){
-    try{
-        const response = await axios.get('/get-messages?movie_id='+movie_id);
+/**
+ * Recupera i messaggi salvati in precedenza dal server e li mostra nella chat.
+ */
+async function getMessages() {
+    try {
+        const response = await axios.get('/get-messages?movie_id=' + movie_id);
         const messages = response.data;
 
         messages.forEach(message => {
-            writeOnHistory(message.text,"received" ,message.name, message.top_critic);
-        })
-
-    }catch(error){
+            writeOnHistory(message.text, "received", message.name, message.top_critic);
+        });
+    } catch (error) {
         console.error(error.response?.data || error.message);
     }
 }
 
 /**
- * Mostra la chat, cambiando l'interfaccia della pagina
- * @param room nome stanza della chat
- * @param userId nome di chi si è collegato
+ * Mostra l'interfaccia della chat e aggiorna le intestazioni con nome stanza e utente.
+ * @param {string} room - Nome della stanza.
+ * @param {string} userId - Nome dell'utente collegato.
  */
 function viewChatInterface(room, userId) {
     document.getElementById('initial_form').style.display = 'none';
     document.getElementById('chat_interface').style.display = 'block';
-    document.getElementById('movie_name_chat').innerHTML = 'CHAT: '+document.getElementById('movie_name').textContent;
+    document.getElementById('movie_name_chat').innerHTML = 'CHAT: ' + document.getElementById('movie_name').textContent;
     document.getElementById('who_you_are').innerHTML = userId;
     getMessages();
-
 }
