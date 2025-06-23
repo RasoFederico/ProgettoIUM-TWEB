@@ -162,9 +162,8 @@ router.get('/get-movie-by-name', async function (req, res, next) {
  */
 router.get('/won-oscar', async function(req, res, next) {
   let movie_name=req.query.movie_name;
-  movie_name = decodeURIComponent(movie_name);
   try{
-    const response =await axios.post('http://localhost:8080/won-oscar',{movie_name});
+    const response =await axios.get(`http://localhost:8080/won-oscar?movie=${movie_name}`);
     res.json(response.data);
   }catch(error){}
 })
