@@ -8,6 +8,8 @@ const {response} = require("express");
  * @openapi
  * /:
  *   get:
+ *     tags:
+ *       - Homepage
  *     summary: Pagina iniziale del sito
  *     responses:
  *       200:
@@ -21,6 +23,8 @@ router.get('/', function(req, res, next) {
  * @openapi
  * /film:
  *   get:
+ *     tags:
+ *       - Movie
  *     summary: Vista dei dettagli dei film
  *     description: Restituisce una pagina HTML con i dettagli del film, inclusi attori, crew e generi.
  *     parameters:
@@ -98,6 +102,8 @@ router.get('/film', async function(req, res, next) {
  * @openapi
  * /get-movie-by-name:
  *   get:
+ *     tags:
+ *       - Homepage
  *     summary: Ottiene un film per nome
  *     description: Restituisce i dettagli di un film recuperandoli dal database in Postgres, dato il nome del film come parametro di query.
  *     parameters:
@@ -131,6 +137,8 @@ router.get('/get-movie-by-name', async function (req, res, next) {
  * @openapi
  * /won-oscar:
  *   get:
+ *     tags:
+ *       - Movie
  *     summary: Verifica se un film ha vinto un Oscar
  *     description: Verifica se un film ha ricevuto un premio Oscar, passando il nome del film come parametro di query e ricercando l'informazione nel database in Postgres.
  *     parameters:
@@ -165,6 +173,8 @@ router.get('/won-oscar', async function(req, res, next) {
  * @openapi
  * /load-reviews:
  *   get:
+ *     tags:
+ *       - Movie
  *     summary: Ottiene recensioni di un film
  *     description: Recupera tutte le recensioni associate a un film specifico, richiedendole al database in mongodb.
  *     parameters:
@@ -239,6 +249,8 @@ router.get('/load-reviews', async function(req, res, next) {
  * @openapi
  * /save-chat-message:
  *   post:
+ *     tags:
+ *       - Movie
  *     summary: Salva un messaggio di chat associato a un film
  *     description: Riceve un messaggio di chat dal client e lo inoltra a un microservizio per essere salvato.
  *     requestBody:
@@ -309,6 +321,8 @@ router.post('/save-chat-message', async function(req, res, next) {
  * @openapi
  * /get-messages:
  *   get:
+ *     tags:
+ *       - Movie
  *     summary: Recupera tutti i messaggi di chat per un film
  *     description: Ottiene la lista dei messaggi associati a uno specifico film, richiedendoli al database in mongodb.
  *     parameters:
@@ -357,6 +371,8 @@ router.get('/get-messages', async function(req, res, next){
  * @openapi
  * /load-movies:
  *   get:
+ *     tags:
+ *       - Movie
  *     summary: Carica i film iniziali per la homepage
  *     description: Recupera un elenco di film da mostrare nella homepage, richiedendoli al database in Postgres.
  *     responses:

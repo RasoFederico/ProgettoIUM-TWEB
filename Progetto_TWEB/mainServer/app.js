@@ -45,10 +45,12 @@ const swaggerOptions = {
       description: 'Documentazione API della Filmoteca',
     },
   },
-  apis: ['./routes/*.js'], // Tutti i file di routes con JSDoc/OpenAPI
+  apis: [ /*   './routes/*.js'  */ path.join(__dirname, 'routes', '*.js')] // Tutti i file di routes con JSDoc/OpenAPI
+  ,
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
+console.log("Swagger paths:", Object.keys(swaggerSpec.paths));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // -------------------

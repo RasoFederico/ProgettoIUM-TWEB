@@ -50,12 +50,13 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Main Server',
+            title: 'MongoDB Server',
             version: '5.0.1',
             description: 'Documentazione API della Filmoteca',
         },
     },
-    apis: ['./routes/*.js'], // File da analizzare per Swagger JSDoc
+   apis: [ /*   './routes/*.js'  */ path.join(__dirname, 'routes', '*.js')] // File da analizzare per Swagger JSDoc
+
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
