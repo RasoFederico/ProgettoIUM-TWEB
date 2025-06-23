@@ -33,5 +33,4 @@ public class MovieService {
 
     public List<String> getGenres(Integer id){return movieRepository.getGenres(id);}
 
-    public int extractId(String name, int year){return movieRepository.extractId(name,year);}
 }

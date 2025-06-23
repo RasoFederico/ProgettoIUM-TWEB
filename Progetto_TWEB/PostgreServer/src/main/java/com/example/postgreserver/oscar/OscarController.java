@@ -11,11 +11,14 @@ public class OscarController {
 
     public OscarController(OscarService oscarService) {this.oscarService = oscarService;}
 
-    @PostMapping("/won-oscar")
+    /**
+     * Verifica che il nome del film passato come parametro abbia vinto o meno l'Oscar come miglior film.
+     * @param movie Il nome del film da verificare.
+     * @return Un boolean che contiene true se il film ha vinto l'Oscar, false altrimenti.
+     */
+    @GetMapping ("/won-oscar")
     public Optional<Boolean> wonOscar(@RequestBody MovieRequest movie){
         Optional<Boolean> x = oscarService.wonOscar(movie.getMovie_name());
-
-
         return x;
     }
 

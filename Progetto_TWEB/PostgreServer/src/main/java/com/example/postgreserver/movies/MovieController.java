@@ -22,7 +22,7 @@ public class MovieController {
 
     /**
      * Restituisce la lista dei film con i relativi poster.
-     * @return
+     * @return restituisce una lista di oggetti MovieAndPoster che contengono i dettagli del film e il relativo poster
      */
     @GetMapping("/load-movies")
     public List<MovieAndPoster> loadMovies(){
@@ -32,7 +32,7 @@ public class MovieController {
     /**
      * Restituisce la lista dei film con i relativi poster attraverso una ricerca per nome
      * @param movieName nome del film
-     * @return
+     * @return restituisce una lista di oggetti MovieAndPoster che contengono i dettagli del film e il relativo poster
      */
     @GetMapping("/get-movie-by-name")
     public List<MovieAndPoster> getMovieByName(@RequestParam String movieName){
@@ -41,11 +41,12 @@ public class MovieController {
         return movieService.findByTitle(movieName);
     }
 
-    @PostMapping("/extract-id")
-    public int extractId(@RequestBody IdRequest idRequest){
-        return movieService.extractId(idRequest.getName(),idRequest.getYear());
-    }
 
+    /**
+     * Restituisce alcuni dettagli di un film specifico tra cui gli attori, la crew e i generi.
+     * @param movieId ID del film
+     * @return un oggetto MovieData contenente liste di attori, crew e generi
+     */
     @GetMapping("/get-actors-crew-genres")
     public MovieData getActorsCrewGenres(@RequestParam int movieId){
         List<String> actors = movieService.getActorsId(movieId);
@@ -54,22 +55,6 @@ public class MovieController {
 
         return new MovieData(actors, crew, genres);
     }
-
-    public static class IdRequest{
-        private String name;
-        private String year;
-        public IdRequest(String name, String year){
-            this.name = name;
-            this.year = year;
-        }
-        public String getName() {
-            return name;
-        }
-        public int getYear() {
-            return parseInt(year);
-        }
-    }
-
 
 
     public static class MovieData{
