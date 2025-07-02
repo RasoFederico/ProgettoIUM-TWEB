@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-@RequestMapping("/api/oscars") // Aggiunto il mapping base per chiarezza
 public class OscarController {
     private OscarService oscarService;
 
